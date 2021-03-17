@@ -18,7 +18,7 @@
     "webpack": "^5.26.2"
   },
   "scripts": {
-    "start": "NODE_ENV=production react-scripts start",
+    "start": "npm run serve:dev",
     "build": "webpack --mode production --config config/webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
