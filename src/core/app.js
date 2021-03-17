@@ -1,3 +1,3 @@
-const SETTINGS = require('./environment').SETTINGS
+import { SETTINGS } from './environment'
 
-module.exports = global.API_BASE_URL = SETTINGS.API_BASE_URL
+export const API_BASE_URL = SETTINGS.API_BASE_URL

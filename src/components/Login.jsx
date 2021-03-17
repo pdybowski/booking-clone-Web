@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, Input, CircularProgress } from '@material-ui/core'
 import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
-import { API_BASE_URL } from '../core/environment'
+import { API_BASE_URL } from '../core/app'
 
 export class Login extends React.Component {
   constructor(props) {
