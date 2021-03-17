@@ -22,7 +22,7 @@
     "build": "webpack --mode production --config config/webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve:dev": "REACT_APP_ENV=development -scripts start",
+    "serve:dev": "REACT_APP_ENV=development react-scripts start",
     "serve:prod": "REACT_APP_ENV=production react-scripts start"
   },
   "eslintConfig": {
