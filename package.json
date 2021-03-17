@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "npm run serve:dev",
-    "build": "webpack --mode production --config config/webpack.prod.js",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve:dev": "REACT_APP_ENV=development react-scripts start",
