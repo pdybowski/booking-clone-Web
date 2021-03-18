@@ -201,7 +201,7 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
-                <Grid item xs={12} className="select-input">
+                <Grid item xs={12} className="select-input text-align-left">
                   <FormControl style={{ minWidth: 223 }}>
                     <InputLabel id="demo-simple-select-label" color="secondary">
                       Role
