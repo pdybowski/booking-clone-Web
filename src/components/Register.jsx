@@ -130,6 +130,7 @@ export class Register extends React.Component {
                 justify="center"
                 alignItems="flex-end"
                 spacing={3}
+                className="align-center-mobile"
               >
                 <Grid item xs={12}>
                   <TextField
@@ -140,6 +141,7 @@ export class Register extends React.Component {
                     onChange={(e) => this.handleEmailChange(e)}
                     noValidate
                     required
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -151,6 +153,7 @@ export class Register extends React.Component {
                     onChange={(e) => this.handlePasswordChange(e)}
                     noValidate
                     required
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -162,6 +165,7 @@ export class Register extends React.Component {
                     onChange={(e) => this.handleRepeatPasswordChange(e)}
                     noValidate
                     required
+                    color="secondary"
                   />
                 </Grid>
               </Grid>
@@ -173,6 +177,7 @@ export class Register extends React.Component {
                 justify="center"
                 alignItems="flex-start"
                 spacing={3}
+                className="align-center-mobile"
               >
                 <Grid item xs={12}>
                   <TextField
@@ -182,6 +187,7 @@ export class Register extends React.Component {
                     onChange={(e) => this.handleFirstNameChange(e)}
                     noValidate
                     required
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -192,16 +198,20 @@ export class Register extends React.Component {
                     onChange={(e) => this.handleLastNameChange(e)}
                     noValidate
                     required
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item xs={12} className="select-input">
-                  <FormControl>
-                    <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <FormControl style={{ minWidth: 223 }}>
+                    <InputLabel id="demo-simple-select-label" color="secondary">
+                      Role
+                    </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       value={this.state.form.role}
                       onChange={(e) => this.handleRoleChange(e)}
+                      color="secondary"
                     >
                       <MenuItem value={USER_ROLE}>User</MenuItem>
                       <MenuItem value={HOTEL_OWNER_ROLE}>Hotel Owner</MenuItem>
@@ -218,7 +228,12 @@ export class Register extends React.Component {
                 alignItems="center"
                 spacing={3}
               >
-                <Grid item xs={12} sm={6} className="text-align-right">
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  className="text-align-right align-center-mobile"
+                >
                   {this.state.form.isSmsAllowed ? (
                     <TextField
                       id="outlined-basic"
@@ -228,6 +243,7 @@ export class Register extends React.Component {
                       onChange={(e) => this.handlePhoneNumberChange(e)}
                       noValidate
                       required
+                      color="secondary"
                     />
                   ) : (
                     <TextField
@@ -237,10 +253,16 @@ export class Register extends React.Component {
                       variant="outlined"
                       onChange={(e) => this.handlePhoneNumberChange(e)}
                       noValidate
+                      color="secondary"
                     />
                   )}
                 </Grid>
-                <Grid item xs={12} sm={6} className="text-align-left">
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  className="text-align-left align-center-mobile"
+                >
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -248,7 +270,9 @@ export class Register extends React.Component {
                         onChange={(e) =>
                           this.handlePhoneNumberCheckboxChange(e)
                         }
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                        inputProps={{
+                          'aria-label': 'secondary checkbox',
+                        }}
                       />
                     }
                     label="Allow SMS"
