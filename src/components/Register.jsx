@@ -109,178 +109,182 @@ export class Register extends React.Component {
 
   render() {
     return (
-      <form
-        id="Register"
-        onSubmit={(e) => this.register(e)}
-        autoComplete="on"
-        className="register-form"
-      >
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          spacing={3}
+      <div className="form-container">
+        <form
+          id="Register"
+          onSubmit={(e) => this.register(e)}
+          autoComplete="on"
+          className="register-form"
         >
-          <Grid item xs={12} sm={6}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Login"
-                  type="email"
-                  variant="outlined"
-                  onChange={(e) => this.handleEmailChange(e)}
-                  noValidate
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Password"
-                  type="password"
-                  variant="outlined"
-                  onChange={(e) => this.handlePasswordChange(e)}
-                  noValidate
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Repeat Password"
-                  type="password"
-                  variant="outlined"
-                  onChange={(e) => this.handleRepeatPasswordChange(e)}
-                  noValidate
-                  required
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="First Name"
-                  variant="outlined"
-                  onChange={(e) => this.handleFirstNameChange(e)}
-                  noValidate
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Last Name"
-                  variant="outlined"
-                  onChange={(e) => this.handleLastNameChange(e)}
-                  noValidate
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl>
-                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={this.state.form.role}
-                    onChange={(e) => this.handleRoleChange(e)}
-                  >
-                    <MenuItem value={USER_ROLE}>User</MenuItem>
-                    <MenuItem value={HOTEL_OWNER_ROLE}>Hotel Owner</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item xs={12}>
-                {this.state.form.isSmsAllowed ? (
-                  <TextField
-                    id="outlined-basic"
-                    type="tel"
-                    label="Phone Number"
-                    variant="outlined"
-                    onChange={(e) => this.handlePhoneNumberChange(e)}
-                    noValidate
-                    required
-                  />
-                ) : (
-                  <TextField
-                    id="outlined-basic"
-                    type="tel"
-                    label="Phone Number"
-                    variant="outlined"
-                    onChange={(e) => this.handlePhoneNumberChange(e)}
-                    noValidate
-                  />
-                )}
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={this.state.form.isSmsAllowed}
-                      onChange={(e) => this.handlePhoneNumberCheckboxChange(e)}
-                      inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
-                  }
-                  label="Allow SMS"
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-
-          {!this.state.registering ? (
-            <Grid item xs={12} sm={6}>
-              <Grid
-                container
-                direction="column"
-                justify="flex-end"
-                alignItems="center"
-              >
-                <Button variant="contained" color="primary" type="submit">
-                  Register
-                </Button>
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid item xs={12} sm={6}>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item xs={12} sm={6} className="grid-form-box">
               <Grid
                 container
                 direction="column"
                 justify="center"
-                alignItems="center"
+                alignItems="flex-end"
+                spacing={3}
               >
-                <CircularProgress />
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Email"
+                    type="email"
+                    variant="outlined"
+                    onChange={(e) => this.handleEmailChange(e)}
+                    noValidate
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={(e) => this.handlePasswordChange(e)}
+                    noValidate
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Repeat Password"
+                    type="password"
+                    variant="outlined"
+                    onChange={(e) => this.handleRepeatPasswordChange(e)}
+                    noValidate
+                    required
+                  />
+                </Grid>
               </Grid>
             </Grid>
-          )}
-        </Grid>
-      </form>
+            <Grid item xs={12} sm={6} className="grid-form-box">
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="flex-start"
+                spacing={3}
+              >
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={(e) => this.handleFirstNameChange(e)}
+                    noValidate
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={(e) => this.handleLastNameChange(e)}
+                    noValidate
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} className="select-input">
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={this.state.form.role}
+                      onChange={(e) => this.handleRoleChange(e)}
+                    >
+                      <MenuItem value={USER_ROLE}>User</MenuItem>
+                      <MenuItem value={HOTEL_OWNER_ROLE}>Hotel Owner</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={3}
+              >
+                <Grid item xs={12} sm={6} className="text-align-right">
+                  {this.state.form.isSmsAllowed ? (
+                    <TextField
+                      id="outlined-basic"
+                      type="tel"
+                      label="Phone Number"
+                      variant="outlined"
+                      onChange={(e) => this.handlePhoneNumberChange(e)}
+                      noValidate
+                      required
+                    />
+                  ) : (
+                    <TextField
+                      id="outlined-basic"
+                      type="tel"
+                      label="Phone Number"
+                      variant="outlined"
+                      onChange={(e) => this.handlePhoneNumberChange(e)}
+                      noValidate
+                    />
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6} className="text-align-left">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.form.isSmsAllowed}
+                        onChange={(e) =>
+                          this.handlePhoneNumberCheckboxChange(e)
+                        }
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                      />
+                    }
+                    label="Allow SMS"
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+
+            {!this.state.registering ? (
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="flex-end"
+                  alignItems="center"
+                >
+                  <Button variant="contained" color="primary" type="submit">
+                    Register
+                  </Button>
+                </Grid>
+              </Grid>
+            ) : (
+              <Grid item xs={12} sm={6}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <CircularProgress />
+                </Grid>
+              </Grid>
+            )}
+          </Grid>
+        </form>
+      </div>
     )
   }
 }
