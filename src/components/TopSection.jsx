@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState } from 'react'
 import { COOKIE_TOKEN } from '../constants'
 import { getCookieValue, getUserInfo } from '../utils'
 import { Login } from './Login'
@@ -8,7 +8,6 @@ import { useSearch } from '../hooks/useSearch'
 export const TopSection = () => {
   const [userInfo, setUserInfo] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [hotels, search] = useSearch()
 
   useMemo(() => {
     const token = getCookieValue(COOKIE_TOKEN)
@@ -21,8 +20,6 @@ export const TopSection = () => {
     }
   }, [])
 
-  console.log(hotels)
-
   return (
     <div id="TopSection">
       <div>Booking Clone</div>
@@ -33,7 +30,6 @@ export const TopSection = () => {
       ) : (
         <Login />
       )}
-      <SearchBar onSearchSubmit={search} />
     </div>
   )
 }

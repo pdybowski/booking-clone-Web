@@ -1,11 +1,15 @@
 import React from 'react'
+import SearchBar from '../../SearchBar'
+import { useSearch } from '../../../hooks/useSearch'
 
-export class MainPageView extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export const MainPageView = () => {
+  const [hotels, search] = useSearch()
 
-  render() {
-    return <div id="MainPageView">Main Page</div>
-  }
+  console.log(hotels)
+
+  return (
+    <div id="MainPageView">
+      <SearchBar onSearchSubmit={search} />
+    </div>
+  )
 }
