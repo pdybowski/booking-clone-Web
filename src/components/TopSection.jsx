@@ -2,8 +2,6 @@ import React, { useMemo, useState } from 'react'
 import { COOKIE_TOKEN } from '../constants'
 import { getCookieValue, getUserInfo } from '../utils'
 import { Login } from './Login'
-import SearchBar from './SearchBar'
-import { useSearch } from '../hooks/useSearch'
 
 export const TopSection = () => {
   const [userInfo, setUserInfo] = useState({})

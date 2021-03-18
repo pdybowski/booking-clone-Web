@@ -9,7 +9,7 @@ export const useSearch = () => {
       params: {
         city,
         // startDate: new Date(startDate).toISOString(),
-        // endDate: new Date(startDate).toISOString(),
+        // endDate: new Date(endDate).toISOString(),
         // single,
         // double,
       },
