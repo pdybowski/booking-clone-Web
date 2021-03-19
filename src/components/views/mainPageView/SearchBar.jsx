@@ -28,15 +28,15 @@ const SearchBar = ({ onSearchSubmit }) => {
   const [city, setCity] = useState('')
   const [startDate, setStartDate] = useState('2021-07-01')
   const [endDate, setEndDate] = useState('2021-07-07')
-  const [single, setSingle] = useState(2)
-  const [double, setDouble] = useState(1)
+  const [adults, setAdults] = useState(2)
+  const [children, setChildren] = useState(1)
 
   const data = {
     city,
     startDate,
     endDate,
-    single,
-    double,
+    adults,
+    children,
   }
 
   const handleSearchSubmit = () => {
@@ -76,25 +76,25 @@ const SearchBar = ({ onSearchSubmit }) => {
       <TextField
         id="standard-number"
         className={classes.numberField}
-        label="Single beds"
+        label="Adults"
         type="number"
         InputLabelProps={{
           shrink: true,
         }}
-        value={single}
-        onChange={(e) => setSingle(e.target.value)}
+        value={adults}
+        onChange={(e) => setAdults(e.target.value)}
       />
       <TextField
         id="standard-number"
         className={classes.numberField}
-        label="Double Beds"
+        label="Children"
         style={{ marginLeft: '.5rem' }}
         type="number"
         InputLabelProps={{
           shrink: true,
         }}
-        value={double}
-        onChange={(e) => setDouble(e.target.value)}
+        value={children}
+        onChange={(e) => setChildren(e.target.value)}
       />
       <Button
         variant="contained"
