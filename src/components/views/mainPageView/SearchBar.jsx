@@ -40,7 +40,6 @@ const SearchBar = ({ onSearchSubmit }) => {
   }
 
   const handleSearchSubmit = () => {
-    console.log(data)
     onSearchSubmit(data)
   }
 
