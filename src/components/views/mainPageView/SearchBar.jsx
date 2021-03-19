@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = ({ onSearchSubmit }) => {
   const classes = useStyles()
 
-  const [city, setCity] = useState('')
+  const [city, setCity] = useState('Warsaw')
   const [startDate, setStartDate] = useState('2021-07-01')
   const [endDate, setEndDate] = useState('2021-07-07')
   const [adults, setAdults] = useState(2)
@@ -46,7 +46,7 @@ const SearchBar = ({ onSearchSubmit }) => {
   return (
     <div className={classes.root}>
       <TextField
-        id="standard"
+        id="margin-none"
         label="City"
         value={city}
         onChange={(e) => setCity(e.target.value)}
