@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField, Input, CircularProgress } from '@material-ui/core'
 import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
+import '../content/css/login.css'
 
 export class Login extends React.Component {
   constructor(props) {
@@ -64,22 +65,31 @@ export class Login extends React.Component {
           id="outlined-basic"
           label="Login"
           type="email"
+          size="small"
           variant="outlined"
           onChange={(e) => this.handleEmailChange(e)}
           noValidate
           required
+          margin="dense"
         />
         <TextField
           id="outlined-basic"
           label="Password"
           type="password"
+          size="small"
           variant="outlined"
           onChange={(e) => this.handlePasswordChange(e)}
           noValidate
           required
+          margin="dense"
         />
         {!this.state.logging ? (
-          <Input type="submit" value="Login" />
+          <Input
+            type="submit"
+            value="Login"
+            margin="dense"
+            className="loginInput"
+          />
         ) : (
           <CircularProgress />
         )}
