@@ -41,12 +41,12 @@ export const TopSection = () => {
             height: '15vh',
           }}
         >
-          <Grid item xs={7}>
+          <Grid item xs={3}>
             <div className="loginHeader">
               Booking <span className="loginHeaderSpan">Clone</span>
             </div>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={9}>
             <Grid
               container
               direction="row"
@@ -90,15 +90,12 @@ export const TopSection = () => {
                 <Grid
                   container
                   direction="row"
-                  justify="space-evenly"
+                  justify="center"
                   alignItems="center"
                 >
-                  <Button size="small" variant="contained" color="secondary">
-                    forgot password
-                  </Button>
-                  <Button size="small" variant="contained" color="secondary">
-                    register
-                  </Button>
+                  <a href="#" className="loginForgotPassword">
+                    FORGOT PASSWORD
+                  </a>
                 </Grid>
               )}
             </Grid>

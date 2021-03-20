@@ -11,3 +11,8 @@
 .loginHeaderSpan {
   color: #ebb15f;
 }
+
+.loginForgotPassword {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}

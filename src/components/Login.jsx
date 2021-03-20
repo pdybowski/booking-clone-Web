@@ -3,6 +3,7 @@ import { TextField, Input, CircularProgress } from '@material-ui/core'
 import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
 import '../content/css/login.css'
+import Button from '@material-ui/core/Button'
 
 export class Login extends React.Component {
   constructor(props) {
@@ -86,12 +87,23 @@ export class Login extends React.Component {
           color="secondary"
         />
         {!this.state.logging ? (
-          <Input
-            type="submit"
-            value="Login"
-            margin="dense"
-            className="loginInput"
-          />
+          <>
+            <Input
+              type="submit"
+              value="Login"
+              margin="dense"
+              className="loginInput"
+              color="secondary"
+            />
+            <Button
+              size="small"
+              variant="contained"
+              color="secondary"
+              style={{ margin: '0 0 0 20px' }}
+            >
+              register
+            </Button>
+          </>
         ) : (
           <CircularProgress />
         )}
