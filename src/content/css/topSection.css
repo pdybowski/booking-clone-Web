@@ -1,0 +1,13 @@
+#TopSection {
+  background-color: #31a3be;
+}
+
+.loginHeader {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fafafa;
+}
+
+.loginHeaderSpan {
+  color: #ebb15f;
+}

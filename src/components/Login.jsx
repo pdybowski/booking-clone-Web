@@ -71,6 +71,7 @@ export class Login extends React.Component {
           noValidate
           required
           margin="dense"
+          color="secondary"
         />
         <TextField
           id="outlined-basic"
@@ -82,6 +83,7 @@ export class Login extends React.Component {
           noValidate
           required
           margin="dense"
+          color="secondary"
         />
         {!this.state.logging ? (
           <Input

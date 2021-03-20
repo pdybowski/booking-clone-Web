@@ -5,6 +5,7 @@ import { Login } from './Login'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import '../content/css/topSection.css'
 
 export const TopSection = () => {
   const [userInfo, setUserInfo] = useState({})
@@ -22,12 +23,25 @@ export const TopSection = () => {
     }
   }, [])
 
+  const logout = () => {
+    localStorage.clear('userInfo')
+  }
+
   return (
-    <div id="TopSection" style={{ height: '15vh', paddingTop: '5px' }}>
+    <div id="TopSection" style={{ padding: '5px 0 5px 0' }}>
       <Container fixed>
-        <Grid container spacing={3} justify="space-between" alignItems="center">
+        <Grid
+          container
+          justify="space-around"
+          alignItems="center"
+          style={{
+            height: '15vh',
+          }}
+        >
           <Grid item xs={7}>
-            <div>Booking Clone</div>
+            <div className="loginHeader">
+              Booking <span className="loginHeaderSpan">Clone</span>
+            </div>
           </Grid>
           <Grid item xs={5}>
             <Grid
@@ -37,7 +51,7 @@ export const TopSection = () => {
               alignItems="center"
             >
               {isLoggedIn ? (
-                <div>
+                <div className="loginUserInfo">
                   Willkommen {userInfo.firstName} {userInfo.lastName} !
                 </div>
               ) : (
@@ -51,14 +65,24 @@ export const TopSection = () => {
               alignItems="center"
             >
               {isLoggedIn ? (
-                <div>
-                  <Button size="small" variant="contained">
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                >
+                  <Button size="small" variant="contained" color="secondary">
                     {userInfo.role} panel
                   </Button>
-                  <Button size="small" variant="contained">
+                  <Button
+                    size="small"
+                    variant="contained"
+                    onClick={logout}
+                    color="secondary"
+                  >
                     logout
                   </Button>
-                </div>
+                </Grid>
               ) : (
                 <Grid
                   container
@@ -66,10 +90,10 @@ export const TopSection = () => {
                   justify="space-evenly"
                   alignItems="center"
                 >
-                  <Button size="small" variant="contained">
+                  <Button size="small" variant="contained" color="secondary">
                     forgot password
                   </Button>
-                  <Button size="small" variant="contained">
+                  <Button size="small" variant="contained" color="secondary">
                     register
                   </Button>
                 </Grid>
