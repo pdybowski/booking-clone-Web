@@ -28,7 +28,10 @@ export const TopSection = () => {
   }
 
   return (
-    <div id="TopSection" style={{ padding: '5px 0 5px 0' }}>
+    <div
+      id="TopSection"
+      style={{ padding: '5px 0 5px 0', marginBottom: '20px' }}
+    >
       <Container fixed>
         <Grid
           container
