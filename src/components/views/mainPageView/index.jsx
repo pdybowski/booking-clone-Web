@@ -5,6 +5,8 @@ import { useSearch } from '../../../hooks/useSearch'
 export const MainPageView = () => {
   const [hotels, search] = useSearch()
 
+  console.log(hotels)
+
   return (
     <div id="MainPageView">
       <SearchBar onSearchSubmit={search} />
