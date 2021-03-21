@@ -1,11 +1,11 @@
 import React from 'react'
-import { MenuList, MenuItem } from '@material-ui/core'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Dropdown } from './Dropdown'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 // EXAMPLE USAGE:
 
 // import Menu from './shared/Menu'
-// import { makeStyles } from '@material-ui/core/styles'
 
 // const routes = [
 //   {
@@ -16,53 +16,62 @@ import { Link, withRouter } from 'react-router-dom'
 //     location: '/register',
 //     name: 'Register',
 //   },
+//   {
+//     location: '/',
+//     name: 'test',
+//     type: 'dropdown',
+//     dropdownItems: [
+//       {
+//         location: '/',
+//         name: 'Main Page',
+//       },
+//       {
+//         location: '/register',
+//         name: 'Register',
+//       },
+//     ],
+//   },
 // ]
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     backgroundColor: theme.palette.secondary.main,
-//     outline: 'none',
-//     padding: '0',
-//     height: '2.8rem',
-//   },
-//   menuItem: {
-//     color: '#fff',
-//     height: '100%',
-//   },
-// }))
-
-// const component = () => {
-//   return <Menu menuItems={routes} useStyles={useStyles} />
+// const classes = {
+//   navBar: 'bg-light',
 // }
 
-const Menu = (props) => {
-  const {
-    menuItems,
-    location: { pathname },
-    useStyles,
-  } = props
+// const component = () => {
+//   return <Menu menuItems={routes} cssClasses={classes} />
+// }
 
-  const classes = useStyles()
-
+const Menu = ({ menuItems, cssClasses }) => {
+  const classes = cssClasses ? cssClasses : {}
   return (
-    <MenuList className={classes.root}>
-      {menuItems.map(({ location, name }) => {
-        return (
-          <MenuItem
-            component={Link}
-            to={location}
-            selected={location === pathname}
-            className={classes.menuItem}
-          >
-            {name}
-          </MenuItem>
-        )
-      })}
-    </MenuList>
+    <Navbar className={`justify-content-center ${classes.navBar}`}>
+      <Nav className={classes.nav}>
+        {menuItems.map((menuItem) => {
+          const { location, name } = menuItem
+          if (menuItem.type === 'dropdown') {
+            return (
+              <NavDropdown
+                title={name}
+                id="basic-nav-dropdown"
+                className={`${classes.navDropdown}`}
+              >
+                <Dropdown
+                  dropdownItems={menuItem.dropdownItems}
+                  classes={classes}
+                />
+              </NavDropdown>
+            )
+          } else {
+            return (
+              <Link className={`nav-link ${classes.navLink}`} to={location}>
+                {name}
+              </Link>
+            )
+          }
+        })}
+      </Nav>
+    </Navbar>
   )
 }
 
-export default withRouter(Menu)
+export default Menu
