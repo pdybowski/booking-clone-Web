@@ -15,8 +15,8 @@ export const useSearch = () => {
         city,
         startDate,
         endDate,
-        adults: adults ? adults : 1,
-        children: children ? children : 0,
+        adults,
+        children,
       }
     }
 
