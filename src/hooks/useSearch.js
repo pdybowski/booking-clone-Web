@@ -13,8 +13,8 @@ export const useSearch = () => {
     } else {
       data = {
         city,
-        startDate,
-        endDate,
+        startDate: new Date(startDate).toISOString(),
+        endDate: new Date(endDate).toISOString(),
         adults,
         children,
       }

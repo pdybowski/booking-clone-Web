@@ -14,11 +14,22 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 140,
+    backgroundSize: '100%',
+    '&:hover': {
+      backgroundSize: '105%',
+    },
+    transition: 'all .3s',
   },
   noUnderLine: {
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
+    },
+  },
+  imageZoom: {
+    backgroundSize: '400px',
+    '&:hover': {
+      backgroundSize: '405px',
     },
   },
 }))
