@@ -12,6 +12,7 @@ import { TopSection } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { Footer } from './components/Footer'
 
 const theme = createMuiTheme({
   palette: {
@@ -56,6 +57,7 @@ ReactDOM.render(
 
         {/* HOTEL OWNER ROUTES */}
         {hotelOwnerRoutes}
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

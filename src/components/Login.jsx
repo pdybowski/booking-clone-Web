@@ -4,6 +4,7 @@ import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
 import '../content/css/login.css'
 import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
 
 export class Login extends React.Component {
   constructor(props) {
@@ -95,14 +96,16 @@ export class Login extends React.Component {
               className="loginInput"
               color="secondary"
             />
-            <Button
-              size="small"
-              variant="contained"
-              color="secondary"
-              style={{ margin: '0 0 0 20px' }}
-            >
-              register
-            </Button>
+            <Link to="/register" style={{ textDecoration: 'none' }}>
+              <Button
+                size="small"
+                variant="contained"
+                color="secondary"
+                style={{ margin: '0 0 0 20px' }}
+              >
+                register
+              </Button>
+            </Link>
           </>
         ) : (
           <CircularProgress />

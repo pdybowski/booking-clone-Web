@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-
+import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SearchBar = ({ onSearchSubmit }) => {
+const SearchBar = () => {
   const classes = useStyles()
 
   const [city, setCity] = useState('Warsaw')
@@ -39,10 +39,21 @@ const SearchBar = ({ onSearchSubmit }) => {
     children,
   }
 
-  const handleSearchSubmit = () => {
-    onSearchSubmit(data)
-  }
+  // let url = '/hotels/'
+  // if (!startDate || !endDate) {
+  //   url += `${data.city}`
+  // } else {
+  //   for (let item in data) {
+  //     if (!data[item]) continue
+  //     if (item !== 'children') {
+  //       url += `${data[item]}_`
+  //     } else {
+  //       url += `${data[item]}`
+  //     }
+  //   }
+  // }
 
+  // console.log(url)
   return (
     <div className={classes.root}>
       <TextField
@@ -96,15 +107,22 @@ const SearchBar = ({ onSearchSubmit }) => {
         value={children}
         onChange={(e) => setChildren(e.target.value)}
       />
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
+      <Link
+        to={{
+          pathname: `hotels/${city}`,
+          state: data,
+        }}
         style={{ marginLeft: '.5rem' }}
-        onClick={handleSearchSubmit}
       >
-        Search
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={{ marginLeft: '.5rem' }}
+        >
+          Search
+        </Button>
+      </Link>
     </div>
   )
 }
