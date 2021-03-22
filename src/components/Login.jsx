@@ -96,16 +96,6 @@ export class Login extends React.Component {
               className="loginInput"
               color="secondary"
             />
-            <Link to="/register" style={{ textDecoration: 'none' }}>
-              <Button
-                size="small"
-                variant="contained"
-                color="secondary"
-                style={{ margin: '0 0 0 20px' }}
-              >
-                register
-              </Button>
-            </Link>
           </>
         ) : (
           <CircularProgress />
