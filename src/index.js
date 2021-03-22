@@ -9,7 +9,6 @@ import generalRoutes from './routes/general'
 import adminRoutes from './routes/admin'
 import hotelOwnerRoutes from './routes/hotelOwner'
 import userRoutes from './routes/user'
-import NoMatchRoute from './routes/noMatch'
 import { TopSection } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
@@ -59,7 +58,6 @@ ReactDOM.render(
 
           {/* HOTEL OWNER ROUTES */}
           {hotelOwnerRoutes}
-          {NoMatchRoute}
         </Switch>
         <Footer />
       </BrowserRouter>
