@@ -27,7 +27,7 @@ export const useSearch = () => {
 
       setHotels(response.data)
     } catch (ex) {
-      console.log(ex)
+      alert(ex.message)
     }
   }
 
