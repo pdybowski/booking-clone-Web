@@ -3,33 +3,31 @@ import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
+import '../../../content/css/searchBar.css'
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '15ch',
+    marginTop: theme.spacing(1),
+    width: '8.8rem',
   },
   numberField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '10ch',
+    marginTop: theme.spacing(1),
+    width: '8.8rem',
   },
 }))
 
 const SearchBar = () => {
   const classes = useStyles()
 
-  const [city, setCity] = useState('Warsaw')
-  const [startDate, setStartDate] = useState('2021-07-01')
-  const [endDate, setEndDate] = useState('2021-07-07')
-  const [adults, setAdults] = useState(2)
-  const [children, setChildren] = useState(1)
+  const [city, setCity] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
 
   const data = {
     city,
@@ -40,12 +38,13 @@ const SearchBar = () => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className="search-bar">
       <TextField
         id="margin-none"
         label="City"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        className={classes.textField}
       />
       <TextField
         id="date"
@@ -98,6 +97,7 @@ const SearchBar = () => {
           state: data,
         }}
         style={{ marginLeft: '.5rem' }}
+        className={classes.textField}
       >
         <Button
           variant="contained"

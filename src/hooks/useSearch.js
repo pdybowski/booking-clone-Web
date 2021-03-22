@@ -20,11 +20,15 @@ export const useSearch = () => {
       }
     }
 
-    const response = await axios.get(global.API_BASE_URL + 'api/hotels', {
-      params: data,
-    })
+    try {
+      const response = await axios.get(global.API_BASE_URL + 'api/hotels', {
+        params: data,
+      })
 
-    setHotels(response.data)
+      setHotels(response.data)
+    } catch (ex) {
+      alert(ex.message)
+    }
   }
 
   return [hotels, search]
