@@ -6,7 +6,6 @@ import wroclaw from '../../../static/mainPageImgs/wroclaw.jpg'
 import bydgoszcz from '../../../static/mainPageImgs/bydgosz.jpg'
 import krakow from '../../../static/mainPageImgs/krakow.jpg'
 import { Grid, makeStyles } from '@material-ui/core'
-import { Footer } from '../../Footer'
 
 const useStyles = makeStyles((theme) => ({
   center: {
@@ -57,7 +56,6 @@ export const MainPageView = () => {
           />
         </Grid>
       </Grid>
-      <Footer />
     </div>
   )
 }

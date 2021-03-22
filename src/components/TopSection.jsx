@@ -9,7 +9,6 @@ import '../content/css/topSection.css'
 
 export const TopSection = () => {
   const [userInfo, setUserInfo] = useState({})
-  console.log(userInfo)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useMemo(() => {

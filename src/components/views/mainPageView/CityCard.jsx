@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { useSearch } from '../../../hooks/useSearch'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 400,

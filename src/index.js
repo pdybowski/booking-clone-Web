@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import './core/bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -9,11 +9,12 @@ import generalRoutes from './routes/general'
 import adminRoutes from './routes/admin'
 import hotelOwnerRoutes from './routes/hotelOwner'
 import userRoutes from './routes/user'
+import NoMatchRoute from './routes/noMatch'
 import { TopSection } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import { Footer } from './components/Footer'
+import { Footer } from './components/shared/Footer'
 
 const theme = createMuiTheme({
   palette: {
@@ -46,18 +47,20 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
+        <Switch>
+          {/* GENERAL ROUTES */}
+          {generalRoutes}
 
-        {/* GENERAL ROUTES */}
-        {generalRoutes}
+          {/* ADMIN ROUTES */}
+          {adminRoutes}
 
-        {/* ADMIN ROUTES */}
-        {adminRoutes}
+          {/* USER ROUTES */}
+          {userRoutes}
 
-        {/* USER ROUTES */}
-        {userRoutes}
-
-        {/* HOTEL OWNER ROUTES */}
-        {hotelOwnerRoutes}
+          {/* HOTEL OWNER ROUTES */}
+          {hotelOwnerRoutes}
+          {NoMatchRoute}
+        </Switch>
         <Footer />
       </BrowserRouter>
     </ThemeProvider>

@@ -39,21 +39,6 @@ const SearchBar = () => {
     children,
   }
 
-  // let url = '/hotels/'
-  // if (!startDate || !endDate) {
-  //   url += `${data.city}`
-  // } else {
-  //   for (let item in data) {
-  //     if (!data[item]) continue
-  //     if (item !== 'children') {
-  //       url += `${data[item]}_`
-  //     } else {
-  //       url += `${data[item]}`
-  //     }
-  //   }
-  // }
-
-  // console.log(url)
   return (
     <div className={classes.root}>
       <TextField
