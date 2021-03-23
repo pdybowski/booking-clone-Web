@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 function Hotel(props) {
   const classes = useStyles()
   const hotel = props
-  console.log(hotel)
   return (
     <div className={classes.root}>
       <Grid item xs={4} className={classes.grid}>
