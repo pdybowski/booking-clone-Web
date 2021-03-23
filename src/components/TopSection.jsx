@@ -25,8 +25,8 @@ export const TopSection = () => {
 
   const logout = () => {
     localStorage.clear('userInfo')
-    window.location.href = '/'
     removeCookie(COOKIE_TOKEN)
+    window.location.href = '/'
   }
 
   return (
