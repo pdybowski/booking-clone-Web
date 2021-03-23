@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SearchBar from './SearchBar'
 import { CityCard } from './CityCard'
 import '../../../content/css/main.css'
@@ -6,7 +6,6 @@ import wroclaw from '../../../static/mainPageImgs/wroclaw.jpg'
 import bydgoszcz from '../../../static/mainPageImgs/bydgosz.jpg'
 import krakow from '../../../static/mainPageImgs/krakow.jpg'
 import { Grid, makeStyles } from '@material-ui/core'
-import { useSearch } from '../../../hooks/useSearch'
 
 const useStyles = makeStyles((theme) => ({
   center: {
