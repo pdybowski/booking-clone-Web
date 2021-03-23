@@ -5,12 +5,10 @@ import './core/bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import reportWebVitals from './reportWebVitals'
-import {
-  generalRoutes,
-  adminRoutes,
-  hotelOwnerRoutes,
-  userRoutes,
-} from './routes'
+import generalRoutes from './routes/general'
+import adminRoutes from './routes/admin'
+import hotelOwnerRoutes from './routes/hotelOwner'
+import userRoutes from './routes/user'
 import { TopSection } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
