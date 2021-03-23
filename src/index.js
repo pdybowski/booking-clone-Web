@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import './core/bootstrap'
 
 import reportWebVitals from './reportWebVitals'
@@ -8,7 +8,7 @@ import generalRoutes from './routes/general'
 import adminRoutes from './routes/admin'
 import hotelOwnerRoutes from './routes/hotelOwner'
 import userRoutes from './routes/user'
-import { TopSection } from './components'
+import { TopSection, HotelMoreDetails } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -47,7 +47,7 @@ ReactDOM.render(
 
         {/* GENERAL ROUTES */}
         {generalRoutes}
-
+        <Route path="/hotels/:id" component={HotelMoreDetails} />
         {/* ADMIN ROUTES */}
         {adminRoutes}
 
