@@ -3,8 +3,6 @@ import { TextField, Input, CircularProgress } from '@material-ui/core'
 import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
 import '../content/css/login.css'
-import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
 
 export class Login extends React.Component {
   constructor(props) {

@@ -6,33 +6,31 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
+    color: theme.palette.secondary.main,
   },
 }))
 
 export const Hotels = ({ match, location }) => {
   const classes = useStyles()
   const [hotels, search] = useSearch()
-  const [pending, setPending] = useState(true)
-  const data = location.state ? location.state : { city: match.params.data }
+  const [loading, setLoading] = useState(false)
+  let data = location.state ? location.state : { city: match.params.data }
+  data = !data.startDate && data.city === 'Anywhere' ? '' : data
   useEffect(() => {
-    async function fetchData() {
-      await search(data)
-      setPending(false)
-    }
-    fetchData()
+    search(data, setLoading)
   }, [])
   return (
     <div>
-      {pending ? (
+      {loading ? (
         <CircularProgress
           className={classes.center}
           style={{ width: '70px', height: '70px' }}
         />
       ) : hotels.hotels && hotels.hotels.length > 0 ? (
         data.startDate ? (
-          <h1>All free hotels in {data.city}</h1>
+          <h1>All free hotels</h1>
         ) : (
-          <h1>All hotels in {data.city}</h1>
+          <h1>All hotels</h1>
         )
       ) : (
         <h1>No hotels found in {data.city}</h1>
