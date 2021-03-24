@@ -44,7 +44,6 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
-        <Hotel />
 
         {/* GENERAL ROUTES */}
         {generalRoutes}

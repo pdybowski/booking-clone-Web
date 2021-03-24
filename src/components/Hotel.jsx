@@ -32,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function Hotel(props) {
+export function HotelCard(hotel) {
   const classes = useStyles()
-  const hotel = props
 
   return (
     <Container maxWidth="lg">
@@ -60,7 +59,7 @@ export function Hotel(props) {
             to={`/hotels/${hotel.localization.city}/${hotel._id}`}
             className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
           >
-            reserve
+            Select
           </Link>
         </Grid>
       </div>
