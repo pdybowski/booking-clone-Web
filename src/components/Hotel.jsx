@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 import HotelIcon from '@material-ui/icons/Hotel'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,63 +22,45 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2),
     },
   },
-  img: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '80%',
-    height: 'auto',
-    margin: '0 auto',
-    padding: '.25rem',
-    backgroundColor: '#fff',
-    border: '1px solid #dee2e6',
-  },
-  grid: {
-    position: 'relative',
-  },
-  rating: {
-    fontSize: '19px',
-    marginLeft: '5px',
-  },
-  hotelHeader: {
-    fontSize: '22px',
-  },
   icon: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
     width: '7em',
     height: '7em',
   },
+  hotelHeader: {
+    fontSize: '30px',
+    fontWeight: 'bold',
+  },
 }))
 
-function Hotel(props) {
+export function Hotel(props) {
   const classes = useStyles()
   const hotel = props
+
   return (
-    <div className={classes.root}>
-      <Grid item xs={4} className={classes.grid}>
-        <HotelIcon className={classes.icon} />
-      </Grid>
-      <Grid item xs={6}>
-        <span className={classes.hotelHeader}>{hotel.name}</span>
-        <Rating
-          className={classes.rating}
-          name="read-only"
-          value={1}
-          readOnly
-        />
-        <p>{hotel.localization.city}</p>
-        <p>{hotel.description}</p>
-      </Grid>
-      <Grid item xs={2} container justify="flex-end" alignItems="flex-end">
-        <Button variant="contained" color="primary">
-          Pokaż
-        </Button>
-      </Grid>
-    </div>
+    <Container maxWidth="lg">
+      <div className={classes.root}>
+        <Grid container justify="center" item xs={4} className={classes.grid}>
+          <HotelIcon className={classes.icon} />
+        </Grid>
+        <Grid item xs={6}>
+          <Grid container justify="space-between">
+            <span className={classes.hotelHeader}>{hotel.name}</span>
+            <Rating
+              className={classes.rating}
+              name="read-only"
+              value={1}
+              readOnly
+            />
+          </Grid>
+          <p>({hotel.localization.city})</p>
+          <p>{hotel.description}</p>
+        </Grid>
+        <Grid item xs={2} container justify="flex-end" alignItems="flex-end">
+          <Button variant="contained" color="primary">
+            Select
+          </Button>
+        </Grid>
+      </div>
+    </Container>
   )
 }
-export default Hotel

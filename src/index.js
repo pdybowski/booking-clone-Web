@@ -8,7 +8,7 @@ import generalRoutes from './routes/general'
 import adminRoutes from './routes/admin'
 import hotelOwnerRoutes from './routes/hotelOwner'
 import userRoutes from './routes/user'
-import { TopSection } from './components'
+import { TopSection, Hotel } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -44,6 +44,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
+        <Hotel />
 
         {/* GENERAL ROUTES */}
         {generalRoutes}
