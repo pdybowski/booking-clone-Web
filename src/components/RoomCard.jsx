@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function RoomCard(room) {
   const classes = useStyles()
-  const handleReserve = (loggedIn, userRole) => {
+  const handleReserve = (loggedIn) => {
     if (!loggedIn) return alert('Please login first')
     if (isHotelOwner() || isAdmin())
       return alert('You are not allowed to make reservation')
