@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgb(236 236 236)',
     marginBottom: '15px',
     borderRadius: '5px',
+    padding: '10px',
   },
   header: {
     fontSize: '22px',
@@ -26,6 +27,9 @@ export function HotelMoreDetails({ hotelId, city }) {
   const classes = useStyles()
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(false)
+
+  hotelId = '604ba08e6cea81001597f032'
+  city = 'Bydgoszcz'
 
   const getHotel = async () => {
     setLoading(true)

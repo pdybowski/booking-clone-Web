@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     position: 'relative',
-    right: '-25%',
     margin: '5px',
   },
 }))
@@ -23,39 +22,44 @@ export function RoomCard(room) {
   const classes = useStyles()
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Grid container direction="row" justify="center" alignItems="center">
-        <span>
-          <SingleBedIcon className={classes.icon} /> Single bed:{' '}
-          <span>{room.beds.single} </span>
-        </span>
-        <span>
-          <KingBedIcon className={classes.icon} /> Double bed:{' '}
-          <span>{room.beds.double} </span>
-        </span>
-        <span>
-          <EuroIcon className={classes.icon} />
-          Price: {room.price}
-        </span>
-        <Link
-          to={`/hotels/${room.hotelId}/${room._id}/reservation`}
-          className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
-        >
-          reserve
-        </Link>
+      <Grid container direction="row" justify="center" alignItems="flex-start">
+        <Grid item xs={8}>
+          <span>Room number: {room.roomNumber}</span>
+          <p>
+            Description: Lorem ipsum, dolor sit amet consectetur adipisicing
+            elit. Exercitationem ut ab eos necessitatibus cum sunt nam, impedit
+            ipsam nobis numquam!
+          </p>
+        </Grid>
+        <Grid container direction="column" item xs={2}>
+          <span>
+            <SingleBedIcon className={classes.icon} /> Single bed:{' '}
+            <span>{room.beds.single} </span>
+          </span>
+          <span>
+            <KingBedIcon className={classes.icon} /> Double bed:{' '}
+            <span>{room.beds.double} </span>
+          </span>
+        </Grid>
+        <Grid container direction="column" item xs={2}>
+          <span>
+            <EuroIcon className={classes.icon} />
+            Price: {room.price}
+          </span>
+          <Link
+            to={`/hotels/${room.hotelId}/${room._id}/reservation`}
+            className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
+          >
+            reserve
+          </Link>
+        </Grid>
       </Grid>
       <Grid
         container
         direction="column"
-        justify="center"
-        alignItems="flex-start"
-      >
-        <span>Room number: {room.roomNumber}</span>
-        <p>
-          Description: Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Exercitationem ut ab eos necessitatibus cum sunt nam, impedit ipsam
-          nobis numquam!
-        </p>
-      </Grid>
+        justify="flex-end"
+        alignItems="flex-end"
+      ></Grid>
     </Grid>
   )
 }
