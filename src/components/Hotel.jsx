@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
 import HotelIcon from '@material-ui/icons/Hotel'
@@ -56,9 +56,12 @@ export function Hotel(props) {
           <p>{hotel.description}</p>
         </Grid>
         <Grid item xs={2} container justify="flex-end" alignItems="flex-end">
-          <Button variant="contained" color="primary">
-            Select
-          </Button>
+          <Link
+            to={`/hotels/${hotel.localization.city}/${hotel._id}`}
+            className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
+          >
+            reserve
+          </Link>
         </Grid>
       </div>
     </Container>
