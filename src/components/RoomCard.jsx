@@ -5,6 +5,7 @@ import KingBedIcon from '@material-ui/icons/KingBed'
 import EuroIcon from '@material-ui/icons/Euro'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
+import { isHotelOwner, isAdmin } from '../utils'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -20,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function RoomCard(room) {
   const classes = useStyles()
+  const handleReserve = (loggedIn, userRole) => {
+    if (!loggedIn) return alert('Please login first')
+    if (isHotelOwner() || isAdmin())
+      return alert('You are not allowed to make reservation')
+  }
   return (
     <Grid container direction="column" justify="center" alignItems="center">
       <Grid container direction="row" justify="center" alignItems="flex-start">
@@ -47,6 +53,7 @@ export function RoomCard(room) {
             Price: {room.price}
           </span>
           <Link
+            onClick={handleReserve()}
             to={`/hotels/${room.hotelId}/${room._id}/reservation`}
             className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
           >

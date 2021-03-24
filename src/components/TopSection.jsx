@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { COOKIE_TOKEN } from '../constants'
 import { getUserInfo, removeCookie } from '../utils'
 import { Login } from './Login'
 import Container from '@material-ui/core/Container'
