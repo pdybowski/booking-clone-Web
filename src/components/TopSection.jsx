@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { COOKIE_TOKEN } from '../constants'
 import { getCookieValue, getUserInfo, removeCookie } from '../utils'
 import { Login } from './Login'
@@ -72,17 +73,24 @@ export const TopSection = () => {
                   justify="flex-end"
                   alignItems="center"
                 >
-                  <Button size="small" variant="contained" color="secondary">
-                    {userInfo.role} panel
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    onClick={logout}
-                    color="secondary"
+                  <Link
+                    to={{
+                      pathname: `/${userInfo.role}`,
+                      state: userInfo,
+                    }}
                   >
-                    logout
-                  </Button>
+                    <Button size="small" variant="contained" color="secondary">
+                      {userInfo.role} panel
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      onClick={logout}
+                      color="secondary"
+                    >
+                      logout
+                    </Button>
+                  </Link>
                 </Grid>
               ) : (
                 <Grid

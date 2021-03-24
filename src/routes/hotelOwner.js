@@ -5,7 +5,7 @@ import { HotelOwnerView } from '../components'
 const hotelOwnerRoutes = [
   <Route
     path="/hotelOwner"
-    component={() => <HotelOwnerView />}
+    component={(props) => <HotelOwnerView {...props} />}
     exact
     key="hotelOwner-route"
   />,
