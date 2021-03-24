@@ -3,13 +3,9 @@ import { useEffect, useState } from 'react'
 import { fetchData } from '../utils'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import SingleBedIcon from '@material-ui/icons/SingleBed'
-import KingBedIcon from '@material-ui/icons/KingBed'
-import EuroIcon from '@material-ui/icons/Euro'
 import Container from '@material-ui/core/Container'
 import LoadingIcon from '../content/LoadingIcon'
-import { Link } from 'react-router-dom'
+import { RoomCard } from './RoomCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,20 +23,6 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2),
     },
   },
-  icon: {
-    position: 'relative',
-    top: '6px',
-    margin: '0 5px',
-  },
-  button: {
-    position: 'relative',
-    right: '-10%',
-  },
-  loadingIcon: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-  },
   header: {
     fontSize: '22px',
   },
@@ -54,18 +36,19 @@ export function HotelMoreDetails(props) {
   const hotelId = props.match.params.id
 
   const getHotel = async () => {
-    const hotel = await fetchData(
-      global.API_BASE_URL + `api/hotels/${hotelId}`,
-      'GET'
-    )
-    setHotel(hotel)
-    setLoading(false)
+    try {
+      const hotel = await fetchData(
+        global.API_BASE_URL + `api/hotels/${hotelId}`,
+        'GET'
+      )
+      setHotel(hotel)
+      setLoading(false)
+    } catch (err) {}
   }
 
   useEffect(() => {
     getHotel()
   }, [])
-
   return loading ? (
     <Grid container direction="row" justify="center" alignItems="center">
       <LoadingIcon />
@@ -79,28 +62,7 @@ export function HotelMoreDetails(props) {
         </Grid>
         <Grid item xs={6}>
           {hotel.rooms.map((room) => {
-            return (
-              <p>
-                <span>
-                  <SingleBedIcon className={classes.icon} /> Single bed:{' '}
-                  <span>{room.beds.single} </span>
-                </span>
-                <span>
-                  <KingBedIcon className={classes.icon} /> Double bed:{' '}
-                  <span>{room.beds.double} </span>
-                </span>
-                <span>
-                  <EuroIcon className={classes.icon} />
-                  Price: {room.price}
-                </span>
-                <Link
-                  to={`/hotels/${hotelId}/${room._id}/reservation`}
-                  className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
-                >
-                  reserve
-                </Link>
-              </p>
-            )
+            return <RoomCard {...room} hotelId={hotel._id} />
           })}
         </Grid>
       </div>
