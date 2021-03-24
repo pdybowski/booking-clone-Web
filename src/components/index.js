@@ -1,4 +1,4 @@
 export * from './views'
 export * from './TopSection'
 export * from './Register'
-export * from './Hotel'
+export * from './HotelCard'

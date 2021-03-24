@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function HotelCard(hotel) {
+export function HotelCard({ hotel }) {
   const classes = useStyles()
 
   return (
