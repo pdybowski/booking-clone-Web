@@ -15,7 +15,7 @@ const getRoleFromLS = () => {
 
 export const isHotelOwner = () => {
   const role = getRoleFromLS()
-  return role == HOTEL_OWNER_ROLE
+  return role === HOTEL_OWNER_ROLE
 }
 
 export const isAdmin = () => {

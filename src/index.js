@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import './core/bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import reportWebVitals from './reportWebVitals'
 import generalRoutes from './routes/general'
@@ -12,6 +13,7 @@ import { TopSection, HotelMoreDetails } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { Footer } from './components/shared/Footer'
 
 const theme = createMuiTheme({
   palette: {
@@ -44,18 +46,20 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
+        <Switch>
+          {/* ADMIN ROUTES */}
+          {adminRoutes}
 
-        {/* GENERAL ROUTES */}
-        {generalRoutes}
-        <Route path="/hotels/:city/:id" component={HotelMoreDetails} />
-        {/* ADMIN ROUTES */}
-        {adminRoutes}
+          {/* USER ROUTES */}
+          {userRoutes}
 
-        {/* USER ROUTES */}
-        {userRoutes}
+          {/* HOTEL OWNER ROUTES */}
+          {hotelOwnerRoutes}
 
-        {/* HOTEL OWNER ROUTES */}
-        {hotelOwnerRoutes}
+          {/* GENERAL ROUTES */}
+          {generalRoutes}
+        </Switch>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
