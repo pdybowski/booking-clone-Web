@@ -47,7 +47,7 @@ ReactDOM.render(
 
         {/* GENERAL ROUTES */}
         {generalRoutes}
-        <Route path="/hotels/:id" component={HotelMoreDetails} />
+        <Route path="/hotels/:city/:id" component={HotelMoreDetails} />
         {/* ADMIN ROUTES */}
         {adminRoutes}
 

@@ -8,7 +8,6 @@ import SingleBedIcon from '@material-ui/icons/SingleBed'
 import KingBedIcon from '@material-ui/icons/KingBed'
 import EuroIcon from '@material-ui/icons/Euro'
 import Container from '@material-ui/core/Container'
-import Hotel from './Hotel'
 import LoadingIcon from '../content/LoadingIcon'
 import { Link } from 'react-router-dom'
 
@@ -37,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     right: '-10%',
   },
+  loadingIcon: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+  },
+  header: {
+    fontSize: '22px',
+  },
 }))
 
 export function HotelMoreDetails(props) {
@@ -44,7 +51,6 @@ export function HotelMoreDetails(props) {
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  console.log(props)
   const hotelId = props.match.params.id
 
   const getHotel = async () => {
@@ -54,7 +60,6 @@ export function HotelMoreDetails(props) {
     )
     setHotel(hotel)
     setLoading(false)
-    console.log(hotel)
   }
 
   useEffect(() => {
@@ -62,12 +67,14 @@ export function HotelMoreDetails(props) {
   }, [])
 
   return loading ? (
-    <LoadingIcon />
+    <Grid container direction="row" justify="center" alignItems="center">
+      <LoadingIcon />
+    </Grid>
   ) : (
     <Container maxWidth="lg">
       <div className={classes.root}>
         <Grid item xs={4}>
-          <p>{hotel.name}</p>
+          <p className={classes.header}>{hotel.name}</p>
           <p>{hotel.localization.city}</p>
         </Grid>
         <Grid item xs={6}>
