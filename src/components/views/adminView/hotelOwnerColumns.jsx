@@ -17,7 +17,7 @@ export const hotelOwnerColumns = (loading, verify) => {
       headerName: 'Veryfied',
       width: 130,
       renderCell: (params) =>
-        params.value === '1' ? (
+        params.value ? (
           <VerifiedUserIcon color="secondary" />
         ) : !loading ? (
           <Button

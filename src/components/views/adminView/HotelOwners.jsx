@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { fetchDataExpanded } from '../../../utils'
+import { fetchData } from '../../../utils'
 import { Table } from '../../shared/Table'
 import { Button, Snackbar } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -23,38 +23,31 @@ export const HotelOwners = ({ columns, useStyles }) => {
         lastName: field.lastName,
         phoneNumber: field.phoneNumber,
         email: field.email,
-        isVerified: field.isVerified ? '1' : '0',
+        isVerified: field.isVerified,
       }
     })
   }
 
-  const isDataOk = (data, status) => {
-    if (!status) {
-      return false
-    }
-    if (status !== 200) {
-      setOpenError({ status: true, message: data.message })
-      return false
-    }
-    return true
-  }
   const handleDeleteUsers = async () => {
     if (selectedRows.length === 0) {
       setOpenError({ status: true, message: 'No user selected!' })
       return
     }
-
-    const response = await fetchDataExpanded(
-      global.API_BASE_URL + `api/admin/users?forceDelete=${forceDelete}`,
-      'DELETE',
-      selectedRows
-    )
-    const { data, status } = response ? response : {}
-    if (!isDataOk(data, status)) return
-    getUsers()
-    setOpenSuccess({
-      status: true,
-      message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
+    selectedRows.forEach(async (user) => {
+      try {
+        await fetchData(
+          global.API_BASE_URL +
+            `api/admin/hotelOwner/${user}?forceDelete=${forceDelete}`,
+          'DELETE'
+        )
+        getUsers()
+        setOpenSuccess({
+          status: true,
+          message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
+        })
+      } catch (err) {
+        setOpenError({ status: true, message: err.message })
+      }
     })
   }
 
@@ -68,31 +61,35 @@ export const HotelOwners = ({ columns, useStyles }) => {
   }
 
   const getUsers = async () => {
-    const response = await fetchDataExpanded(
-      global.API_BASE_URL + 'api/admin/hotelOwners',
-      'GET'
-    )
-
-    const { data } = response ? response : {}
-    if (data) {
-      setUsers(getNeededUserData(data))
-      setPending(false)
+    try {
+      const data = await fetchData(
+        global.API_BASE_URL + 'api/admin/hotelOwners',
+        'GET'
+      )
+      if (data) {
+        setUsers(getNeededUserData(data))
+        setPending(false)
+      }
+    } catch (err) {
+      setOpenError({ status: true, message: err.message })
     }
   }
 
   const handleVerifyHotelOwner = async (id) => {
     setPending(true)
-    const response = await fetchDataExpanded(
-      global.API_BASE_URL + `api/admin/verifyHotelOwner/${id}`,
-      'PUT'
-    )
-    const { data, status } = response ? response : {}
-    if (!isDataOk(data, status)) return
-    getUsers()
-    setOpenSuccess({
-      status: true,
-      message: 'User Verified',
-    })
+    try {
+      await fetchData(
+        global.API_BASE_URL + `api/admin/verifyHotelOwner/${id}`,
+        'PUT'
+      )
+      getUsers()
+      setOpenSuccess({
+        status: true,
+        message: 'User Verified',
+      })
+    } catch (err) {
+      setOpenError({ status: true, message: err.message })
+    }
     setPending(false)
   }
 

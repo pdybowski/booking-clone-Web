@@ -7,10 +7,10 @@ import { Users } from './Users'
 import {
   ADMIN_PATHNAMES,
   usersColumns,
-  hotelOwnerColumns,
   adminStyles as useStyles,
 } from '../../../constants'
 import { WelcomePage } from './WelcomePage'
+import { hotelOwnerColumns } from './hotelOwnerColumns'
 
 export class AdminView extends React.Component {
   constructor(props) {
