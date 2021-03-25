@@ -4,7 +4,13 @@ import { AdminMenu } from './AdminMenu'
 import { HotelOwners } from './HotelOwners'
 import { Reservations } from './Reservations'
 import { Users } from './Users'
-import { PATHNAMES } from '../../../constants'
+import {
+  ADMIN_PATHNAMES,
+  usersColumns,
+  hotelOwnerColumns,
+  adminStyles as useStyles,
+} from '../../../constants'
+import { WelcomePage } from './WelcomePage'
 
 export class AdminView extends React.Component {
   constructor(props) {
@@ -19,10 +25,12 @@ export class AdminView extends React.Component {
   }
 
   handleRenderTable(path) {
-    if (path === PATHNAMES.USERS) return <Users />
-    if (path === PATHNAMES.HOTELOWNERS) return <HotelOwners />
-    if (path === PATHNAMES.RESERVATIONS) return <Reservations />
-    if (!path) return
+    if (path === ADMIN_PATHNAMES.USERS)
+      return <Users columns={usersColumns} useStyles={useStyles} />
+    if (path === ADMIN_PATHNAMES.HOTELOWNERS)
+      return <HotelOwners columns={hotelOwnerColumns} useStyles={useStyles} />
+    if (path === ADMIN_PATHNAMES.RESERVATIONS) return <Reservations />
+    if (!path) return <WelcomePage useStyles={useStyles} />
   }
   render() {
     return (

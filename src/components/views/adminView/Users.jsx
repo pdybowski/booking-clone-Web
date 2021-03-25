@@ -1,87 +1,128 @@
-import { CircularProgress, makeStyles } from '@material-ui/core'
+import { Checkbox, FormControlLabel } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { COOKIE_TOKEN } from '../../../constants'
-import { getCookieValue } from '../../../utils'
+import { fetchDataExpanded } from '../../../utils'
 import { Table } from '../../shared/Table'
+import { Button, Snackbar } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { Alert } from '../../shared/Alert'
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'phoneNumber',
-    headerName: 'Phone Number',
-    width: 200,
-  },
-  { field: 'email', headerName: 'Email', width: 130 },
-]
-
-const useStyles = makeStyles((theme) => ({
-  center: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    color: theme.palette.secondary.main,
-  },
-  centerItems: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '70vh',
-  },
-}))
-
-export const Users = () => {
+export const Users = ({ columns, useStyles }) => {
   const [selectedRows, setSelectedRows] = useState([])
   const [users, setUsers] = useState([])
   const [pending, setPending] = useState(true)
+  const [forceDelete, setForceDelete] = useState(false)
+  const [openError, setOpenError] = useState({ status: false, message: '' })
+  const [openSuccess, setOpenSuccess] = useState({ status: false, message: '' })
   const classes = useStyles()
 
+  const getNeededUserData = (data) => {
+    return data.map((field) => {
+      return {
+        id: field._id,
+        firstName: field.firstName,
+        lastName: field.lastName,
+        phoneNumber: field.phoneNumber,
+        email: field.email,
+      }
+    })
+  }
+  const isDataOk = (data, status) => {
+    if (status && status !== 200) {
+      setOpenError({ status: true, message: data.message })
+      return false
+    }
+    return true
+  }
+
+  const handleDeleteUsers = async () => {
+    if (selectedRows.length === 0) {
+      setOpenError({ status: true, message: 'No user selected!' })
+      return
+    }
+
+    const response = await fetchDataExpanded(
+      global.API_BASE_URL + `api/admin/users?forceDelete=${forceDelete}`,
+      'DELETE',
+      selectedRows
+    )
+    const { data, status } = response ? response : {}
+    if (!isDataOk(data, status)) return
+    getUsers()
+    setOpenSuccess({
+      status: true,
+      message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
+    })
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setOpenError(false)
+    setOpenSuccess(false)
+  }
+
   const getUsers = async () => {
-    try {
-      const promise = await fetch(global.API_BASE_URL + 'api/admin/users', {
-        method: 'GET',
-        headers: { 'X-Auth-token': getCookieValue(COOKIE_TOKEN) },
-      })
-      const data = await promise.json()
-      setUsers(
-        data.map((field, index) => {
-          return {
-            id: index + 1,
-            firstName: field.firstName,
-            lastName: field.lastName,
-            phoneNumber: field.phoneNumber,
-            email: field.email,
-          }
-        })
-      )
+    const response = await fetchDataExpanded(
+      global.API_BASE_URL + 'api/admin/users',
+      'GET'
+    )
+    const { data } = response ? response : {}
+    if (data) {
+      setUsers(getNeededUserData(data))
       setPending(false)
-    } catch (err) {
-      console.log(err)
     }
   }
+
   useEffect(() => {
     getUsers()
   }, [])
+
   return (
     <div className={classes.centerItems}>
-      {!pending ? (
-        <Table
-          rows={users}
-          columns={columns}
-          height="500px"
-          width="50%"
-          pageSize={5}
-          setSelectedRows={setSelectedRows}
-          selectedRows={selectedRows}
+      <div className={classes.controlRow}>
+        <FormControlLabel
+          value="true"
+          control={<Checkbox color="primary" />}
+          label="Force Delete"
+          labelPlacement="start"
+          style={{ marginRight: '16px', marginBottom: 0 }}
+          onClick={() => setForceDelete(!forceDelete)}
         />
-      ) : (
-        <CircularProgress
-          className={classes.center}
-          style={{ width: '70px', height: '70px' }}
-        />
-      )}
-      {console.log(users)}
+        <Button
+          variant="contained"
+          className={classes.button}
+          startIcon={<DeleteIcon />}
+          onClick={handleDeleteUsers}
+        >
+          Remove
+        </Button>
+      </div>
+      <Table
+        rows={users}
+        columns={columns}
+        height="90%"
+        width="100%"
+        pageSize={8}
+        setSelectedRows={setSelectedRows}
+        selectedRows={selectedRows}
+        loading={pending}
+      />
+      <Snackbar
+        open={openError.status}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert severity="error">{openError.message}</Alert>
+      </Snackbar>
+      <Snackbar
+        open={openSuccess.status}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert severity="success">{openSuccess.message}</Alert>
+      </Snackbar>
     </div>
   )
 }
