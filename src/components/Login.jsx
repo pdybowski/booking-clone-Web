@@ -63,6 +63,7 @@ export class Login extends React.Component {
       <form id="Login" onSubmit={(e) => this.login(e)} autoComplete="on">
         <TextField
           id="outlined-basic"
+          className="loginTextField"
           label="Login"
           type="email"
           size="small"
@@ -96,7 +97,7 @@ export class Login extends React.Component {
             />
           </>
         ) : (
-          <CircularProgress />
+          <CircularProgress color="secondary" />
         )}
       </form>
     )
