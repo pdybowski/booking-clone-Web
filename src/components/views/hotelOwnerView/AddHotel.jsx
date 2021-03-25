@@ -38,6 +38,7 @@ const AddHotel = () => {
 
   const [errorMsg, setErrorMsg] = useState()
   const [alertOpen, setAlertOpen] = useState(false)
+  const [successOpen, setSuccessOpen] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -67,6 +68,7 @@ const AddHotel = () => {
     }
 
     setAlertOpen(false)
+    setSuccessOpen(false)
   }
 
   const handleNext = () => {
@@ -90,9 +92,14 @@ const AddHotel = () => {
     setActiveStep(0)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      fetchData(global.API_BASE_URL + 'api/hotelOwner/hotels', 'POST', data)
+      await fetchData(
+        global.API_BASE_URL + 'api/hotelOwner/hotels',
+        'POST',
+        data
+      )
+      setSuccessOpen(true)
     } catch (ex) {
       alert(ex)
     }
@@ -142,7 +149,7 @@ const AddHotel = () => {
             return false
           }
         }
-        if (!phoneNumber) {
+        if (!phoneNumber || phoneNumber.toString().length !== 9) {
           setErrorMsg('Phone number is incorrect.')
           setAlertOpen(true)
           return false
@@ -249,6 +256,15 @@ const AddHotel = () => {
       <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
           {errorMsg}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success">
+          Hotel has been added
         </Alert>
       </Snackbar>
     </div>

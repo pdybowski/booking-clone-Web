@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
@@ -26,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
 const useForceUpdate = () => {
   const [value, setValue] = useState(0)
   return () => setValue((value) => value + 1)
@@ -34,6 +40,9 @@ const useForceUpdate = () => {
 export const RoomsStep = ({ setRooms }) => {
   const classes = useStyles()
   const forceUpdate = useForceUpdate()
+
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [errorMsg, setErrorMsg] = useState()
 
   const [roomsList, setRoomsList] = useState([])
   const [roomNumber, setRoomNumber] = useState()
@@ -57,8 +66,35 @@ export const RoomsStep = ({ setRooms }) => {
   }
 
   const handleRoomAdd = () => {
-    if (!roomNumber || !price || !single || !double) return
+    if (!roomNumber) {
+      setErrorMsg('Room number in incorrect.')
+      setAlertOpen(true)
+      return
+    }
+    if (single <= 0 || !single) {
+      setErrorMsg('Single Beds count is incorrect.')
+      setAlertOpen(true)
+      return
+    }
+    if (double <= 0 || !single) {
+      setErrorMsg('Double Beds count is incorrect.')
+      setAlertOpen(true)
+      return
+    }
+    if (price < 10) {
+      setErrorMsg('Price is incorrect.')
+      setAlertOpen(true)
+      return
+    }
     setRoomsList([...roomsList, room])
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setAlertOpen(false)
   }
 
   return (
@@ -137,6 +173,11 @@ export const RoomsStep = ({ setRooms }) => {
           )
         })}
       </List>
+      <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {errorMsg}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }
