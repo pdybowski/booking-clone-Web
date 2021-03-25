@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
+import { fetchData } from '../../../utils/'
 import { makeStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 import Typography from '@material-ui/core/Typography'
 import { RoomsStep, LocalizationStep, BasicInformationStep } from './steps'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    height: 'auto',
+    marginTop: '3rem',
   },
   backButton: {
     marginRight: theme.spacing(1),
@@ -20,12 +25,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
 const getSteps = () => {
   return ['Basic information', 'Localization', 'Rooms']
 }
 
 const AddHotel = () => {
   const classes = useStyles()
+
+  const [errorMsg, setErrorMsg] = useState()
+  const [alertOpen, setAlertOpen] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -34,22 +46,28 @@ const AddHotel = () => {
   const [phoneNumber, setPhoneNumber] = useState()
   const [country, setCountry] = useState()
   const [city, setCity] = useState()
-  const [zipCode, setZipCode] = useState()
+  const [zipcode, setZipcode] = useState()
   const [street, setStreet] = useState()
   const [buildingNumber, setBuildingNumber] = useState()
+  const [rooms, setRooms] = useState([])
 
   const data = {
     name,
     email,
     phoneNumber,
-    country,
-    city,
-    zipCode,
-    street,
-    buildingNumber,
+    localization: { country, city, zipcode, street, buildingNumber },
+    rooms,
   }
 
   const steps = getSteps()
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setAlertOpen(false)
+  }
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -59,9 +77,25 @@ const AddHotel = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  const handleSubmit = () => {
+  const restart = () => {
+    setName()
+    setEmail()
+    setPhoneNumber()
+    setCountry()
+    setCity()
+    setZipcode()
+    setStreet()
+    setBuildingNumber()
+    setRooms([])
     setActiveStep(0)
-    console.log(data)
+  }
+
+  const handleSubmit = () => {
+    try {
+      fetchData(global.API_BASE_URL + 'api/hotelOwner/hotels', 'POST', data)
+    } catch (ex) {
+      alert(ex)
+    }
   }
 
   const getStepContent = (stepIndex) => {
@@ -79,15 +113,80 @@ const AddHotel = () => {
           <LocalizationStep
             setCountry={setCountry}
             setCity={setCity}
-            setZipCode={setZipCode}
+            setZipcode={setZipcode}
             setStreet={setStreet}
             setBuildingNumber={setBuildingNumber}
           />
         )
       case 2:
-        return <RoomsStep />
+        return <RoomsStep setRooms={setRooms} />
       default:
         return 'Unknown stepIndex'
+    }
+  }
+
+  const getValidationFunction = () => {
+    switch (activeStep) {
+      case 0:
+        if (!name) {
+          setErrorMsg('Name is incorrect')
+          setAlertOpen(true)
+          return false
+        }
+        if (email) {
+          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          const isValidEmail = re.test(String(email).toLowerCase())
+          if (!isValidEmail) {
+            setErrorMsg('Email is incorrect.')
+            setAlertOpen(true)
+            return false
+          }
+        }
+        if (!phoneNumber) {
+          setErrorMsg('Phone number is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        handleNext()
+        break
+      case 1:
+        if (!country) {
+          setErrorMsg('Country is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        if (!city) {
+          setErrorMsg('City is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        if (!zipcode) {
+          setErrorMsg('Zip code is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        if (!street) {
+          setErrorMsg('Street is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        if (!buildingNumber) {
+          setErrorMsg('Building number is incorrect.')
+          setAlertOpen(true)
+          return false
+        }
+        handleNext()
+        break
+      case 2:
+        if (rooms.length < 1) {
+          setErrorMsg('You should provide at least 1 room.')
+          setAlertOpen(true)
+          return false
+        }
+        handleNext()
+        break
+      default:
+        return
     }
   }
 
@@ -112,7 +211,8 @@ const AddHotel = () => {
             <Typography className={classes.instructions}>
               All steps completed
             </Typography>
-            <Button onClick={handleSubmit}>Submit And Restart</Button>
+            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={restart}>Restart</Button>
           </div>
         ) : (
           <div
@@ -133,13 +233,24 @@ const AddHotel = () => {
               >
                 Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                value="BasicInformation"
+                onClick={getValidationFunction}
+              >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
           </div>
         )}
       </div>
+      <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {errorMsg}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

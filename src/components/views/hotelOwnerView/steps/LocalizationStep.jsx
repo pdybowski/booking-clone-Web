@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 export const LocalizationStep = ({
   setCountry,
   setCity,
-  setZipCode,
+  setZipcode,
   setBuildingNumber,
   setStreet,
 }) => {
@@ -43,7 +43,7 @@ export const LocalizationStep = ({
       <TextField
         id="standard-basic"
         label="Zip Code"
-        onChange={(e) => setZipCode(e.target.value)}
+        onChange={(e) => setZipcode(e.target.value)}
       />
       <TextField
         id="standard-number"

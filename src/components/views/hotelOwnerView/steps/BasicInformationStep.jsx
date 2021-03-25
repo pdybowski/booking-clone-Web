@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
+import { TextField } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -17,23 +17,36 @@ const useStyles = makeStyles((theme) => ({
 export const BasicInformationStep = ({ setName, setEmail, setPhoneNumber }) => {
   const classes = useStyles()
 
+  const onBasicInformationSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <form className={classes.form} noValidate autoComplete="off">
+    <form
+      id="BasicInformation"
+      className={classes.form}
+      noValidate
+      autoComplete="off"
+      onSubmit={onBasicInformationSubmit}
+    >
       <TextField
-        id="standard-basic"
+        id="standard-required"
         label="Name"
         onChange={(e) => setName(e.target.value)}
+        required
       />
       <TextField
         id="standard-basic"
         label="Email"
+        type="email"
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <TextField
-        id="standard-number"
-        type="number"
+        id="standard-basic"
         label="Phone Number"
         onChange={(e) => setPhoneNumber(e.target.value)}
+        required
       />
     </form>
   )
