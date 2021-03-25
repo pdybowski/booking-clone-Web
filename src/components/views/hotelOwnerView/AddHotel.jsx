@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  buttons: {
+    marginBottom: '5rem',
+  },
 }))
 
 function Alert(props) {
@@ -39,6 +42,7 @@ const AddHotel = () => {
   const [errorMsg, setErrorMsg] = useState()
   const [alertOpen, setAlertOpen] = useState(false)
   const [successOpen, setSuccessOpen] = useState(false)
+  const [submitBtnVisible, setSubmitBtnVisible] = useState(true)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -100,9 +104,15 @@ const AddHotel = () => {
         data
       )
       setSuccessOpen(true)
+      setSubmitBtnVisible(false)
     } catch (ex) {
       alert(ex)
     }
+  }
+
+  const validateError = (errorMsg) => {
+    setErrorMsg(errorMsg)
+    setAlertOpen(true)
   }
 
   const getStepContent = (stepIndex) => {
@@ -136,60 +146,66 @@ const AddHotel = () => {
     switch (activeStep) {
       case 0:
         if (!name) {
-          setErrorMsg('Name is incorrect')
-          setAlertOpen(true)
+          validateError('Name is incorrect')
           return false
         }
+
         if (email) {
           const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           const isValidEmail = re.test(String(email).toLowerCase())
+
           if (!isValidEmail) {
-            setErrorMsg('Email is incorrect.')
-            setAlertOpen(true)
+            validateError('Email is incorrect.')
             return false
           }
         }
-        if (!phoneNumber || phoneNumber.toString().length !== 9) {
-          setErrorMsg('Phone number is incorrect.')
-          setAlertOpen(true)
+
+        if (!email) {
+          validateError('Provide an email.')
           return false
         }
+
+        if (!phoneNumber || phoneNumber.toString().length !== 9) {
+          validateError('Phone number is incorrect.')
+          return false
+        }
+
         handleNext()
         break
       case 1:
         if (!country) {
-          setErrorMsg('Country is incorrect.')
-          setAlertOpen(true)
+          validateError('Country is incorrect.')
           return false
         }
+
         if (!city) {
-          setErrorMsg('City is incorrect.')
-          setAlertOpen(true)
+          validateError('City is incorrect.')
           return false
         }
+
         if (!zipcode) {
-          setErrorMsg('Zip code is incorrect.')
-          setAlertOpen(true)
+          validateError('Zip code is incorrect.')
           return false
         }
+
         if (!street) {
-          setErrorMsg('Street is incorrect.')
-          setAlertOpen(true)
+          validateError('Street is incorrect.')
           return false
         }
+
         if (!buildingNumber) {
-          setErrorMsg('Building number is incorrect.')
-          setAlertOpen(true)
+          validateError('Building number is incorrect.')
           return false
         }
+
         handleNext()
         break
       case 2:
         if (rooms.length < 1) {
-          setErrorMsg('You should provide at least 1 room.')
-          setAlertOpen(true)
+          validateError('You should provide at least 1 room.')
           return false
         }
+
         handleNext()
         break
       default:
@@ -218,7 +234,7 @@ const AddHotel = () => {
             <Typography className={classes.instructions}>
               All steps completed
             </Typography>
-            <Button onClick={handleSubmit}>Submit</Button>
+            {submitBtnVisible ? <Button onClick={handleSubmit}>Submit</Button> : null}
             <Button onClick={restart}>Restart</Button>
           </div>
         ) : (
@@ -236,7 +252,7 @@ const AddHotel = () => {
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                className={classes.backButton}
+                className={`${classes.backButton} ${classes.buttons}`}
               >
                 Back
               </Button>
@@ -246,6 +262,7 @@ const AddHotel = () => {
                 type="submit"
                 value="BasicInformation"
                 onClick={getValidationFunction}
+                className={classes.buttons}
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>

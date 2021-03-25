@@ -65,25 +65,30 @@ export const RoomsStep = ({ setRooms }) => {
     price,
   }
 
+  const validateError = (errorMsg) => {
+    setErrorMsg(errorMsg)
+    setAlertOpen(true)
+  }
+
   const handleRoomAdd = () => {
     if (!roomNumber) {
-      setErrorMsg('Room number in incorrect.')
-      setAlertOpen(true)
+      validateError('Room number in incorrect.')
+      return
+    }
+    if (!description) {
+      validateError('Description is inncorect.')
       return
     }
     if (single <= 0 || !single) {
-      setErrorMsg('Single Beds count is incorrect.')
-      setAlertOpen(true)
+      validateError('Single Beds count is incorrect.')
       return
     }
     if (double <= 0 || !single) {
-      setErrorMsg('Double Beds count is incorrect.')
-      setAlertOpen(true)
+      validateError('Double Beds count is incorrect.')
       return
     }
     if (price < 10) {
-      setErrorMsg('Price is incorrect.')
-      setAlertOpen(true)
+      validateError('Price is incorrect.')
       return
     }
     setRoomsList([...roomsList, room])
@@ -111,6 +116,7 @@ export const RoomsStep = ({ setRooms }) => {
           label="Description"
           multiline
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
         <TextField
           type="number"

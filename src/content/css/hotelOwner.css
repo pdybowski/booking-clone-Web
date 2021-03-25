@@ -21,3 +21,11 @@
 .room-list-item {
   height: 2.5rem;
 }
+
+@media screen and (max-width: 550px) {
+  .room-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -45,6 +45,7 @@ export const BasicInformationStep = ({ setName, setEmail, setPhoneNumber }) => {
       <TextField
         id="standard-basic"
         label="Phone Number"
+        type="number"
         onChange={(e) => setPhoneNumber(e.target.value)}
         required
       />

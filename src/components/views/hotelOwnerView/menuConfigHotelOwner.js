@@ -1,11 +1,11 @@
 export const menuItems = [
   {
     name: 'Hotels',
-    location: '/hotelOwner',
+    location: '/',
     type: 'dropdown',
     dropdownItems: [
       {
-        location: '/showAllMyHotels',
+        location: '/hotelOwner/showAll',
         name: 'Show All',
       },
       {
@@ -13,7 +13,7 @@ export const menuItems = [
         name: 'Edit Hotels',
       },
       {
-        location: '/addMyHotel',
+        location: '/hotelOwner/addHotel',
         name: 'Add Hotels',
       },
       {

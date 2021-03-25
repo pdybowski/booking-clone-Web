@@ -1,17 +1,31 @@
 import React, { useEffect } from 'react'
 import { isHotelOwner, isHotelOwnerVerified } from '../../../utils'
-import HotelOwnerPanel from './HotelOwnerPanel'
+import Menu from '../../shared/Menu'
+import { menuItems, classes } from './menuConfigHotelOwner'
 import '../../../content/css/hotelOwner.css'
+import AddHotel from './AddHotel'
+import ShowAll from './ShowAll'
 
 export const HotelOwnerView = ({ location }) => {
   useEffect(() => {
     if (!isHotelOwner()) return (window.location.href = '/')
   }, [])
 
+  const handleRouteChange = (path) => {
+    if (path === '/hotelOwner/addHotel') {
+      return <AddHotel />
+    } else if (path === '/hotelOwner/showAll' || path === '/hotelOwner') {
+      return <ShowAll />
+    }
+  }
+
   return (
     <>
       {isHotelOwnerVerified() ? (
-        <HotelOwnerPanel />
+        <>
+          <Menu menuItems={menuItems} cssClasses={classes} />
+          {handleRouteChange(location.pathname)}
+        </>
       ) : (
         <div className="owner-not-verified">
           <h2>You are not verified yet.</h2>
