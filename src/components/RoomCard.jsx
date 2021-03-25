@@ -19,9 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function RoomCard(room) {
+export function RoomCard(room, isLogged) {
+  room = {
+    description: '',
+    _id: '604ba08e6cea81001597f034',
+    roomNumber: '1A',
+    beds: {
+      single: 2,
+      double: 2,
+    },
+    price: 500,
+  }
   const classes = useStyles()
   const handleReserve = (loggedIn) => {
+    console.log(loggedIn)
     if (!loggedIn) return alert('Please login first')
     if (isHotelOwner() || isAdmin())
       return alert('You are not allowed to make reservation')
@@ -53,11 +64,12 @@ export function RoomCard(room) {
             Price: {room.price}
           </span>
           <Link
-            onClick={handleReserve()}
-            to={`/hotels/${room.hotelId}/${room._id}/reservation`}
+            onClick={() => {
+              handleReserve(isLogged)
+            }}
             className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
           >
-            reserve
+            Make Reservation
           </Link>
         </Grid>
       </Grid>
