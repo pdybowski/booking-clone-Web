@@ -135,7 +135,6 @@ export const HotelOwners = ({ columns, useStyles }) => {
       >
         <Alert severity="success">{openSuccess.message}</Alert>
       </Snackbar>
-      {console.log(pending)}
     </div>
   )
 }
