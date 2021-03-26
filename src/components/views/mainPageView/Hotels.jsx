@@ -1,6 +1,7 @@
 import { CircularProgress, makeStyles } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useSearch } from '../../../hooks/useSearch'
+import { HotelCard } from '../../HotelCard'
 const useStyles = makeStyles((theme) => ({
   center: {
     position: 'absolute',
@@ -26,16 +27,16 @@ export const Hotels = ({ match, location }) => {
           className={classes.center}
           style={{ width: '70px', height: '70px' }}
         />
-      ) : hotels.hotels && hotels.hotels.length > 0 ? (
-        data.startDate ? (
-          <h1>All free hotels</h1>
-        ) : (
-          <h1>All hotels</h1>
-        )
+      ) : hotels.hotels ? (
+        <>
+          <h1>{data.city ? data.city : ' Anywhere'}</h1>
+          {hotels.hotels.map((hotel) => (
+            <HotelCard hotel={hotel} />
+          ))}
+        </>
       ) : (
         <h1>No hotels found in {data.city}</h1>
       )}
-      {/* There must be loop with HotelCard */}
     </div>
   )
 }
