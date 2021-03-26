@@ -91,7 +91,6 @@ export class Login extends React.Component {
             <Input
               type="submit"
               value="Login"
-              margin="dense"
               className="loginInput"
               color="secondary"
             />
