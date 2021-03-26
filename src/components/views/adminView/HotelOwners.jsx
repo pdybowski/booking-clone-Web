@@ -1,4 +1,3 @@
-import { Checkbox, FormControlLabel } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { fetchData } from '../../../utils'
 import { Table } from '../../shared/Table'
