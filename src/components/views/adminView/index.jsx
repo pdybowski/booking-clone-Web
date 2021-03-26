@@ -11,17 +11,13 @@ import {
 } from '../../../constants'
 import { WelcomePage } from './WelcomePage'
 import { hotelOwnerColumns } from './hotelOwnerColumns'
+import { Redirect } from 'react-router'
 
 export class AdminView extends React.Component {
   constructor(props) {
     super(props)
 
-    this._init()
     this.pathname = this.props.location ? this.props.location.pathname : null
-  }
-
-  _init() {
-    if (!isAdmin()) return (window.location.href = '/')
   }
 
   handleRenderTable(path) {
@@ -35,8 +31,14 @@ export class AdminView extends React.Component {
   render() {
     return (
       <div>
-        <AdminMenu />
-        {this.handleRenderTable(this.pathname)}
+        {isAdmin() ? (
+          <>
+            <AdminMenu />
+            {this.handleRenderTable(this.pathname)}
+          </>
+        ) : (
+          <Redirect to="/" />
+        )}
       </div>
     )
   }
