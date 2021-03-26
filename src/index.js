@@ -9,7 +9,7 @@ import generalRoutes from './routes/general'
 import adminRoutes from './routes/admin'
 import hotelOwnerRoutes from './routes/hotelOwner'
 import userRoutes from './routes/user'
-import { TopSection } from './components'
+import { TopSection, HotelMoreDetails } from './components'
 import { loadUserInfo, getCookieValue } from './utils'
 import { COOKIE_TOKEN } from './constants'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -50,11 +50,11 @@ ReactDOM.render(
           {/* ADMIN ROUTES */}
           {adminRoutes}
 
-          {/* HOTEL OWNER ROUTES */}
-          {hotelOwnerRoutes}
-
           {/* USER ROUTES */}
           {userRoutes}
+
+          {/* HOTEL OWNER ROUTES */}
+          {hotelOwnerRoutes}
 
           {/* GENERAL ROUTES */}
           {generalRoutes}
