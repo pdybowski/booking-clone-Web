@@ -35,18 +35,21 @@ export const Users = ({ columns, useStyles }) => {
       return
     }
     try {
+      setPending(true)
       await fetchData(
         global.API_BASE_URL + `api/admin/users?forceDelete=${forceDelete}`,
         'DELETE',
         selectedRows
       )
-      getUsers()
+      await getUsers()
       setOpenSuccess({
         status: true,
         message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
       })
+      setPending(false)
     } catch (err) {
       setOpenError({ status: true, message: err.message })
+      setPending(false)
     }
   }
 

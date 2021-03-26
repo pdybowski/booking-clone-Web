@@ -10,7 +10,6 @@ export const HotelOwners = ({ columns, useStyles }) => {
   const [selectedRows, setSelectedRows] = useState([])
   const [users, setUsers] = useState([])
   const [pending, setPending] = useState(true)
-  const [forceDelete, setForceDelete] = useState(false)
   const [openError, setOpenError] = useState({ status: false, message: '' })
   const [openSuccess, setOpenSuccess] = useState({ status: false, message: '' })
   const classes = useStyles()
@@ -35,18 +34,20 @@ export const HotelOwners = ({ columns, useStyles }) => {
     }
     selectedRows.forEach(async (user) => {
       try {
+        setPending(true)
         await fetchData(
-          global.API_BASE_URL +
-            `api/admin/hotelOwner/${user}?forceDelete=${forceDelete}`,
+          global.API_BASE_URL + `api/admin/hotelOwner/${user}`,
           'DELETE'
         )
-        getUsers()
+        await getUsers()
         setOpenSuccess({
           status: true,
           message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
         })
+        setPending(false)
       } catch (err) {
         setOpenError({ status: true, message: err.message })
+        setPending(false)
       }
     })
   }
@@ -82,15 +83,16 @@ export const HotelOwners = ({ columns, useStyles }) => {
         global.API_BASE_URL + `api/admin/verifyHotelOwner/${id}`,
         'PUT'
       )
-      getUsers()
+      await getUsers()
       setOpenSuccess({
         status: true,
         message: 'User Verified',
       })
+      setPending(false)
     } catch (err) {
       setOpenError({ status: true, message: err.message })
+      setPending(false)
     }
-    setPending(false)
   }
 
   useEffect(() => {
@@ -100,14 +102,6 @@ export const HotelOwners = ({ columns, useStyles }) => {
   return (
     <div className={classes.centerItems}>
       <div className={classes.controlRow}>
-        <FormControlLabel
-          value="true"
-          control={<Checkbox color="primary" />}
-          label="Force Delete"
-          labelPlacement="start"
-          style={{ marginRight: '16px', marginBottom: 0 }}
-          onClick={() => setForceDelete(!forceDelete)}
-        />
         <Button
           variant="contained"
           className={classes.button}
@@ -119,7 +113,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
       </div>
       <Table
         rows={users}
-        columns={columns(pending, handleVerifyHotelOwner)}
+        columns={columns(handleVerifyHotelOwner)}
         height="90%"
         width="100%"
         pageSize={8}
@@ -142,6 +136,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
       >
         <Alert severity="success">{openSuccess.message}</Alert>
       </Snackbar>
+      {console.log(pending)}
     </div>
   )
 }
