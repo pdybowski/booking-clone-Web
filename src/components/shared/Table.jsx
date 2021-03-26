@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { DataGrid, GridOverlay } from '@material-ui/data-grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import { CircularProgress } from '@material-ui/core'
 
 function CustomLoadingOverlay() {
   return (
@@ -32,15 +33,20 @@ export function Table({
         onSelectionModelChange={(newSelection) => {
           setSelectionModel(newSelection.selectionModel)
         }}
-        components={{
-          LoadingOverlay: CustomLoadingOverlay,
-        }}
+        components={
+          loading.type !== 'userPending' ? (
+            { LoadingOverlay: CustomLoadingOverlay }
+          ) : (
+            <CircularProgress color="secondary" />
+          )
+        }
         selectionModel={selectionModel}
         rows={rows}
         columns={columns}
         pageSize={pageSize}
-        loading={loading}
+        loading={loading.state}
       />
+      {console.log(loading)}
     </div>
   )
 }

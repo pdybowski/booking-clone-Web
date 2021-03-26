@@ -8,7 +8,11 @@ import { Alert } from '../../shared/Alert'
 export const HotelOwners = ({ columns, useStyles }) => {
   const [selectedRows, setSelectedRows] = useState([])
   const [users, setUsers] = useState([])
-  const [pending, setPending] = useState(true)
+  const [pending, setPending] = useState({
+    state: true,
+    type: 'userPending',
+  })
+  const [loading, setLoading] = useState(false)
   const [openError, setOpenError] = useState({ status: false, message: '' })
   const [openSuccess, setOpenSuccess] = useState({ status: false, message: '' })
   const classes = useStyles()
@@ -33,7 +37,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
     }
     selectedRows.forEach(async (user) => {
       try {
-        setPending(true)
+        setPending({ state: true, type: 'tablePending' })
         await fetchData(
           global.API_BASE_URL + `api/admin/hotelOwner/${user}`,
           'DELETE'
@@ -43,10 +47,10 @@ export const HotelOwners = ({ columns, useStyles }) => {
           status: true,
           message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
         })
-        setPending(false)
+        setPending({ state: false, type: 'tablePending' })
       } catch (err) {
         setOpenError({ status: true, message: err.message })
-        setPending(false)
+        setPending({ state: false, type: 'tablePending' })
       }
     })
   }
@@ -68,7 +72,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
       )
       if (data) {
         setUsers(getNeededUserData(data))
-        setPending(false)
+        setPending({ state: false, type: 'userPending' })
       }
     } catch (err) {
       setOpenError({ status: true, message: err.message })
@@ -76,7 +80,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
   }
 
   const handleVerifyHotelOwner = async (id) => {
-    setPending(true)
+    setLoading(true)
     try {
       await fetchData(
         global.API_BASE_URL + `api/admin/verifyHotelOwner/${id}`,
@@ -87,10 +91,10 @@ export const HotelOwners = ({ columns, useStyles }) => {
         status: true,
         message: 'User Verified',
       })
-      setPending(false)
+      setLoading(false)
     } catch (err) {
       setOpenError({ status: true, message: err.message })
-      setPending(false)
+      setLoading(false)
     }
   }
 
@@ -112,7 +116,7 @@ export const HotelOwners = ({ columns, useStyles }) => {
       </div>
       <Table
         rows={users}
-        columns={columns(handleVerifyHotelOwner)}
+        columns={columns(loading, handleVerifyHotelOwner)}
         height="90%"
         width="100%"
         pageSize={8}

@@ -9,7 +9,11 @@ import { Alert } from '../../shared/Alert'
 export const Users = ({ columns, useStyles }) => {
   const [selectedRows, setSelectedRows] = useState([])
   const [users, setUsers] = useState([])
-  const [pending, setPending] = useState(true)
+  const [pending, setPending] = useState({
+    state: true,
+    type: 'userPending',
+  })
+
   const [forceDelete, setForceDelete] = useState(false)
   const [openError, setOpenError] = useState({ status: false, message: '' })
   const [openSuccess, setOpenSuccess] = useState({ status: false, message: '' })
@@ -35,7 +39,7 @@ export const Users = ({ columns, useStyles }) => {
       return
     }
     try {
-      setPending(true)
+      setPending({ state: true, type: 'tablePending' })
       await fetchData(
         global.API_BASE_URL + `api/admin/users?forceDelete=${forceDelete}`,
         'DELETE',
@@ -46,10 +50,10 @@ export const Users = ({ columns, useStyles }) => {
         status: true,
         message: selectedRows.length > 1 ? 'Users Removed!' : 'User Removed!',
       })
-      setPending(false)
+      setPending({ state: false, type: 'tablePending' })
     } catch (err) {
       setOpenError({ status: true, message: err.message })
-      setPending(false)
+      setPending({ state: false, type: 'tablePending' })
     }
   }
 
@@ -64,13 +68,14 @@ export const Users = ({ columns, useStyles }) => {
 
   const getUsers = async () => {
     try {
+      setPending({ state: true, type: 'userPending' })
       const data = await fetchData(
         global.API_BASE_URL + 'api/admin/users',
         'GET'
       )
       if (data) {
         setUsers(getNeededUserData(data))
-        setPending(false)
+        setPending({ state: false, type: 'userPending' })
       }
     } catch (err) {
       setOpenError({ status: true, message: err.message })
@@ -125,6 +130,7 @@ export const Users = ({ columns, useStyles }) => {
       >
         <Alert severity="success">{openSuccess.message}</Alert>
       </Snackbar>
+      {console.log(pending)}
     </div>
   )
 }

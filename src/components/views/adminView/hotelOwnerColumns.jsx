@@ -1,8 +1,8 @@
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import { Button } from '@material-ui/core'
-import { CircularProgress } from '@material-ui/core'
+import { LOADING } from '../../../constants'
 
-export const hotelOwnerColumns = (verify) => {
+export const hotelOwnerColumns = (loading, verify) => {
   return [
     { field: 'firstName', headerName: 'First name', width: 130 },
     { field: 'lastName', headerName: 'Last name', width: 130 },
@@ -23,7 +23,10 @@ export const hotelOwnerColumns = (verify) => {
           <Button
             variant="outlined"
             color="secondary"
-            onClick={() => verify(params.id)}
+            onClick={(e) => {
+              verify(params.id)
+              e.target.innerHTML = LOADING
+            }}
           >
             Verify
           </Button>
