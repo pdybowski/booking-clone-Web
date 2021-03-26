@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { RoomsStep, LocalizationStep, BasicInformationStep } from './steps'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +43,7 @@ const AddHotel = () => {
   const [errorMsg, setErrorMsg] = useState()
   const [alertOpen, setAlertOpen] = useState(false)
   const [successOpen, setSuccessOpen] = useState(false)
-  const [submitBtnVisible, setSubmitBtnVisible] = useState(true)
+  const [loadingCircle, setLoadingCircle] = useState(false)
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -83,17 +84,8 @@ const AddHotel = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  const restart = () => {
-    setName()
-    setEmail()
-    setPhoneNumber()
-    setCountry()
-    setCity()
-    setZipcode()
-    setStreet()
-    setBuildingNumber()
-    setRooms([])
-    setActiveStep(0)
+  const handleCancel = () => {
+    window.location.href = '/hotelOwner'
   }
 
   const handleSubmit = async () => {
@@ -104,15 +96,41 @@ const AddHotel = () => {
         data
       )
       setSuccessOpen(true)
-      setSubmitBtnVisible(false)
+      setLoadingCircle(false)
+      setTimeout(() => {
+        window.location.href = '/hotelOwner'
+      }, 2000)
     } catch (ex) {
-      alert(ex)
+      validateError(ex.message)
+      setLoadingCircle(false)
     }
   }
 
   const validateError = (errorMsg) => {
     setErrorMsg(errorMsg)
     setAlertOpen(true)
+  }
+
+  const getFinishOrLoading = () => {
+    if (loadingCircle) {
+      return <CircularProgress className={classes.buttons} color="secondary" />
+    } else {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          value="BasicInformation"
+          onClick={() => {
+            handleSubmit()
+            setLoadingCircle(true)
+          }}
+          className={classes.buttons}
+        >
+          Finish
+        </Button>
+      )
+    }
   }
 
   const getStepContent = (stepIndex) => {
@@ -223,39 +241,33 @@ const AddHotel = () => {
         ))}
       </Stepper>
       <div>
-        {activeStep === steps.length ? (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography className={classes.instructions}>
+            {getStepContent(activeStep)}
+          </Typography>
           <div
             style={{
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <Typography className={classes.instructions}>
-              All steps completed
-            </Typography>
-            {submitBtnVisible ? <Button onClick={handleSubmit}>Submit</Button> : null}
-            <Button onClick={restart}>Restart</Button>
-          </div>
-        ) : (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={`${classes.backButton} ${classes.buttons}`}
-              >
-                Back
-              </Button>
+            <Button
+              onClick={activeStep === 0 ? handleCancel : handleBack}
+              className={`${classes.backButton} ${classes.buttons}`}
+            >
+              {activeStep === 0 ? 'Cancel' : 'Back'}
+            </Button>
+            {activeStep === steps.length - 1 ? (
+              getFinishOrLoading()
+            ) : (
               <Button
                 variant="contained"
                 color="primary"
@@ -264,11 +276,11 @@ const AddHotel = () => {
                 onClick={getValidationFunction}
                 className={classes.buttons}
               >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                Next
               </Button>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
       <Snackbar open={alertOpen} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">

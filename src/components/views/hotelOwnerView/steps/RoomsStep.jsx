@@ -72,24 +72,19 @@ export const RoomsStep = ({ setRooms }) => {
 
   const handleRoomAdd = () => {
     if (!roomNumber) {
-      validateError('Room number in incorrect.')
-      return
+      return validateError('Room number in incorrect.')
     }
     if (!description) {
-      validateError('Description is inncorect.')
-      return
+      return validateError('Description is inncorect.')
     }
     if (single <= 0 || !single) {
-      validateError('Single Beds count is incorrect.')
-      return
+      return validateError('Single Beds count is incorrect.')
     }
     if (double <= 0 || !single) {
-      validateError('Double Beds count is incorrect.')
-      return
+      return validateError('Double Beds count is incorrect.')
     }
     if (price < 10) {
-      validateError('Price is incorrect.')
-      return
+      return validateError('Price is incorrect.')
     }
     setRoomsList([...roomsList, room])
   }
@@ -112,13 +107,6 @@ export const RoomsStep = ({ setRooms }) => {
           required
         />
         <TextField
-          id="standard-multiline-static"
-          label="Description"
-          multiline
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <TextField
           type="number"
           label="Single Beds"
           onChange={(e) => setSingle(e.target.value)}
@@ -134,6 +122,13 @@ export const RoomsStep = ({ setRooms }) => {
           type="number"
           label="Price"
           onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+        <TextField
+          id="standard-multiline-static"
+          label="Description"
+          multiline
+          onChange={(e) => setDescription(e.target.value)}
           required
         />
         <Button variant="contained" color="secondary" onClick={handleRoomAdd}>

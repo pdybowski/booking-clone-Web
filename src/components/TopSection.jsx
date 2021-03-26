@@ -88,7 +88,7 @@ export const TopSection = () => {
                       onClick={logout}
                       color="secondary"
                     >
-                      logout
+                      Logout
                     </Button>
                   </Link>
                 </Grid>

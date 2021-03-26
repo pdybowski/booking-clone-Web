@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { isHotelOwner, isHotelOwnerVerified } from '../../../utils'
+import React from 'react'
+import { isHotelOwnerVerified } from '../../../utils'
 import Menu from '../../shared/Menu'
 import { menuItems, classes } from './menuConfigHotelOwner'
 import '../../../content/css/hotelOwner.css'
@@ -7,10 +7,6 @@ import AddHotel from './AddHotel'
 import ShowAll from './ShowAll'
 
 export const HotelOwnerView = ({ location }) => {
-  useEffect(() => {
-    if (!isHotelOwner()) return (window.location.href = '/')
-  }, [])
-
   const handleRouteChange = (path) => {
     if (path === '/hotelOwner/addHotel') {
       return <AddHotel />
