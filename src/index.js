@@ -25,6 +25,10 @@ const theme = createMuiTheme({
       main: '#ebb15f',
       contrastText: '#000',
     },
+    error: {
+      main: '#f44336',
+      contrastText: '#fff',
+    },
   },
 })
 
@@ -46,6 +50,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
+
         <Switch>
           {/* ADMIN ROUTES */}
           {adminRoutes}
@@ -59,6 +64,7 @@ ReactDOM.render(
           {/* GENERAL ROUTES */}
           {generalRoutes}
         </Switch>
+
         <Footer />
       </BrowserRouter>
     </ThemeProvider>

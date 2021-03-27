@@ -1,7 +1,8 @@
-import { CircularProgress, makeStyles } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { useSearch } from '../../../hooks/useSearch'
 import { HotelCard } from '../../HotelCard'
+import { CircularProgress, makeStyles } from '@material-ui/core'
+import { useSearch } from '../../../hooks'
+
 const useStyles = makeStyles((theme) => ({
   center: {
     position: 'absolute',
@@ -18,6 +19,7 @@ export const Hotels = ({ match, location }) => {
   const classes = useStyles()
   const [hotels, search] = useSearch()
   const [loading, setLoading] = useState(false)
+
   let data = location.state ? location.state : { city: match.params.data }
   data = !data.startDate && data.city === 'Anywhere' ? '' : data
 
@@ -31,6 +33,7 @@ export const Hotels = ({ match, location }) => {
   useEffect(() => {
     search(data, setLoading)
   }, [])
+
   return (
     <div className={classes.container}>
       {loading ? (

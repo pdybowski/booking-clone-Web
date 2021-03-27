@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Dropdown } from './Dropdown'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+
+import { Dropdown } from './Dropdown'
 
 // EXAMPLE USAGE:
 
@@ -63,7 +64,11 @@ const Menu = ({ menuItems, cssClasses }) => {
             )
           } else {
             return (
-              <Link className={`nav-link ${classes.navLink}`} to={location}>
+              <Link
+                className={`nav-link ${classes.navLink}`}
+                to={location}
+                key={menuItem.name}
+              >
                 {name}
               </Link>
             )

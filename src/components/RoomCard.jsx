@@ -1,10 +1,12 @@
 import React from 'react'
+
 import { makeStyles } from '@material-ui/core/styles'
 import SingleBedIcon from '@material-ui/icons/SingleBed'
 import KingBedIcon from '@material-ui/icons/KingBed'
 import EuroIcon from '@material-ui/icons/Euro'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
+
 import { isHotelOwner, isAdmin } from '../utils'
 
 const useStyles = makeStyles((theme) => ({
@@ -20,24 +22,14 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function RoomCard({ room, isLogged, days }) {
-  // room = {
-  //   description: '',
-  //   _id: '604ba08e6cea81001597f034',
-  //   roomNumber: '1A',
-  //   beds: {
-  //     single: 2,
-  //     double: 2,
-  //   },
-  //   price: 500,
-  // }
-  console.log(room)
   const classes = useStyles()
+
   const handleReserve = (loggedIn) => {
-    console.log(loggedIn)
     if (!loggedIn) return alert('Please login first')
     if (isHotelOwner() || isAdmin())
       return alert('You are not allowed to make reservation')
   }
+
   return (
     <Grid container direction="column" justify="center" alignItems="center">
       <Grid container direction="row" justify="center" alignItems="flex-start">
