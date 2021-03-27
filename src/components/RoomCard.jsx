@@ -19,17 +19,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function RoomCard(room, isLogged) {
-  room = {
-    description: '',
-    _id: '604ba08e6cea81001597f034',
-    roomNumber: '1A',
-    beds: {
-      single: 2,
-      double: 2,
-    },
-    price: 500,
-  }
+export function RoomCard({ room, isLogged, days }) {
+  // room = {
+  //   description: '',
+  //   _id: '604ba08e6cea81001597f034',
+  //   roomNumber: '1A',
+  //   beds: {
+  //     single: 2,
+  //     double: 2,
+  //   },
+  //   price: 500,
+  // }
+  console.log(room)
   const classes = useStyles()
   const handleReserve = (loggedIn) => {
     console.log(loggedIn)
@@ -42,11 +43,7 @@ export function RoomCard(room, isLogged) {
       <Grid container direction="row" justify="center" alignItems="flex-start">
         <Grid item xs={8}>
           <span>Room number: {room.roomNumber}</span>
-          <p>
-            Description: Lorem ipsum, dolor sit amet consectetur adipisicing
-            elit. Exercitationem ut ab eos necessitatibus cum sunt nam, impedit
-            ipsam nobis numquam!
-          </p>
+          <p>{room.description}</p>
         </Grid>
         <Grid container direction="column" item xs={2}>
           <span>
@@ -61,7 +58,7 @@ export function RoomCard(room, isLogged) {
         <Grid container direction="column" item xs={2}>
           <span>
             <EuroIcon className={classes.icon} />
-            Price: {room.price}
+            Price for {days} {days > 1 ? 'days' : 'day'}: {room.price * days}
           </span>
           <Link
             onClick={() => {

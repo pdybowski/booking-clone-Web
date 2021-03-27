@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     color: theme.palette.secondary.main,
   },
+  container: {
+    padding: 20,
+  },
 }))
 
 export const Hotels = ({ match, location }) => {
@@ -17,26 +20,36 @@ export const Hotels = ({ match, location }) => {
   const [loading, setLoading] = useState(false)
   let data = location.state ? location.state : { city: match.params.data }
   data = !data.startDate && data.city === 'Anywhere' ? '' : data
+
+  const calulateDays = () => {
+    return data.startDate
+      ? (new Date(data.endDate).getTime() -
+          new Date(data.startDate).getTime()) /
+          (24 * 3600 * 1000)
+      : 1
+  }
   useEffect(() => {
     search(data, setLoading)
   }, [])
   return (
-    <div>
+    <div className={classes.container}>
       {loading ? (
         <CircularProgress
           className={classes.center}
           style={{ width: '70px', height: '70px' }}
         />
-      ) : hotels.hotels ? (
+      ) : hotels.hotels?.length > 0 ? (
         <>
           <h1>{data.city ? data.city : ' Anywhere'}</h1>
-          {hotels.hotels.map((hotel) => (
-            <HotelCard hotel={hotel} />
-          ))}
+          {hotels.hotels.map((hotel) => {
+            const days = calulateDays()
+            return <HotelCard hotel={hotel} days={days} />
+          })}
         </>
       ) : (
         <h1>No hotels found in {data.city}</h1>
       )}
+      {console.log(hotels)}
     </div>
   )
 }

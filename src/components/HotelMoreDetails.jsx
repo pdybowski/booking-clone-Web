@@ -23,10 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function HotelMoreDetails({ hotelId, city }) {
+export function HotelMoreDetails({ hotelId, city, location }) {
   const classes = useStyles()
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(false)
+  const numberOfDays = location.state
 
   const getHotel = async () => {
     setLoading(true)
@@ -69,7 +70,7 @@ export function HotelMoreDetails({ hotelId, city }) {
               justify="center"
               alignItems="center"
             >
-              <RoomCard {...room} hotelId={hotel._id} />
+              <RoomCard room={room} hotelId={hotel._id} days={numberOfDays} />
             </Grid>
           </Container>
         )

@@ -19,6 +19,7 @@ const generalRoutes = [
       <HotelMoreDetails
         hotelId={props.match.params.id}
         city={props.match.params.data}
+        {...props}
       />
     )}
     key="app-hotelDetails"

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function HotelCard({ hotel }) {
+export function HotelCard({ hotel, days }) {
   const classes = useStyles()
 
   return (
@@ -51,12 +51,15 @@ export function HotelCard({ hotel }) {
               readOnly
             />
           </Grid>
-          <p>({hotel.localization.city})</p>
+          <p>{hotel.localization.city}</p>
           <p>{hotel.description}</p>
         </Grid>
         <Grid item xs={2} container justify="flex-end" alignItems="flex-end">
           <Link
-            to={`/hotels/${hotel.localization.city}/${hotel._id}`}
+            to={{
+              pathname: `/hotels/${hotel.localization.city}/${hotel._id}`,
+              state: days,
+            }}
             className={`MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-22 MuiButton-containedPrimary ${classes.button}`}
           >
             Select
