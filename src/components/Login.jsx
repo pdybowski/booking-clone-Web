@@ -1,8 +1,8 @@
 import React from 'react'
 import { TextField, Input, CircularProgress } from '@material-ui/core'
+
 import { fetchData, saveCookie, loadUserInfo } from '../utils'
 import { COOKIE_TOKEN } from '../constants'
-import '../content/css/login.css'
 
 export class Login extends React.Component {
   constructor(props) {
@@ -37,8 +37,8 @@ export class Login extends React.Component {
         cvalue: token,
         expiredHours: 1,
       }
-      saveCookie(cookieOpt)
 
+      saveCookie(cookieOpt)
       await loadUserInfo()
 
       this.setState({ logging: false })

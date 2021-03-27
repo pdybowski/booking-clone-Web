@@ -1,16 +1,18 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+
 import { COOKIE_TOKEN, HOTEL_OWNER_ROLE } from '../constants'
 import { getUserInfo, removeCookie, isUserLoggedIn } from '../utils'
 import { Login } from './Login'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import '../content/css/topSection.css'
 
 export const TopSection = () => {
   const [userInfo, setUserInfo] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  useMemo(() => {
+  useEffect(() => {
     const isLogged = isUserLoggedIn()
     if (isLogged) {
       const data = getUserInfo()
@@ -24,6 +26,7 @@ export const TopSection = () => {
     removeCookie(COOKIE_TOKEN)
     window.location.href = '/'
   }
+
   return (
     <div id="TopSection" className="topSectionContainer">
       <Grid container direction="row" justify="flex-start" alignItems="center">
@@ -69,9 +72,15 @@ export const TopSection = () => {
             </a>
           </Grid>
           <Grid item className="loginRegister">
-            <a href="/register" className="loginLink">
-              REGISTER
-            </a>
+            <Link to={`/register`} className="loginLink">
+              <Button
+                size="small"
+                variant="contained"
+                color="secondary"
+              >
+                REGISTER
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       )}
