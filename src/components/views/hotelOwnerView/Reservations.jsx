@@ -35,7 +35,7 @@ const Reservations = () => {
     return notFormatted.slice(0, 15)
   }
 
-  const getNeededUsersData = (data) => {
+  const getNeededReservationData = (data) => {
     return data.map((field) => {
       return {
         id: field._id,
@@ -57,7 +57,7 @@ const Reservations = () => {
           'GET'
         )
 
-        setReservations(getNeededUsersData(reservations))
+        setReservations(getNeededReservationData(reservations))
         setPending({ state: false, type: 'tablePending' })
       } catch (ex) {
         setOpenError(true)
