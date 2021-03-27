@@ -27,15 +27,8 @@ const useStyles = makeStyles((theme) => ({
 export function HotelMoreDetails({ hotelId, city, location }) {
   const classes = useStyles()
   const [hotel, setHotel] = useState(null)
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false)
   const numberOfDays = location.state
-=======
-  const [loading, setLoading] = useState(true)
-
-  hotelId = '604ba08e6cea81001597f032'
-  city = 'Bydgoszcz'
->>>>>>> master
 
   const getHotel = async () => {
     try {
