@@ -50,6 +50,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <TopSection />
+
         <Switch>
           {/* ADMIN ROUTES */}
           {adminRoutes}
@@ -63,6 +64,7 @@ ReactDOM.render(
           {/* GENERAL ROUTES */}
           {generalRoutes}
         </Switch>
+
         <Footer />
       </BrowserRouter>
     </ThemeProvider>
