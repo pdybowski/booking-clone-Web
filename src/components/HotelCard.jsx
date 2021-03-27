@@ -52,7 +52,7 @@ export function HotelCard({ hotel, days }) {
               readOnly
             />
           </Grid>
-          <p>{hotel.localization.city}</p>
+          <p>({hotel.localization.city})</p>
           <p>{hotel.description}</p>
         </Grid>
         <Grid item xs={2} container justify="flex-end" alignItems="flex-end">

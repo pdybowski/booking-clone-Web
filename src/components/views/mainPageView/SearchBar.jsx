@@ -8,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router-dom'
-import '../../../content/css/searchBar.css'
 import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles((theme) => ({
@@ -38,14 +37,14 @@ const SearchBar = ({ onSearchSubmit }) => {
     children,
   }
 
-  const handleOnSubmit = (e) => {
+  const submit = (e) => {
     e.preventDefault()
     setRedirect(true)
   }
 
   return (
     <div className="search-bar-container">
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={submit}>
         <Box className="search-bar" borderRadius={5} boxShadow={3}>
           <FormControl
             className={`${classes.field} search-bar-field`}

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export function HotelMoreDetails({ hotelId, city, location }) {
   const classes = useStyles()
   const [hotel, setHotel] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const numberOfDays = location.state
 
   const getHotel = async () => {
@@ -49,7 +49,13 @@ export function HotelMoreDetails({ hotelId, city, location }) {
   }, [])
 
   return loading ? (
-    <Grid container direction="row" justify="center" alignItems="center">
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      style={{ width: '100%', height: '80vh' }}
+    >
       <LoadingIcon />
     </Grid>
   ) : (

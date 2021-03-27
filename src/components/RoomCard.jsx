@@ -50,7 +50,7 @@ export function RoomCard({ room, isLogged, days }) {
         <Grid container direction="column" item xs={2}>
           <span>
             <EuroIcon className={classes.icon} />
-            Price for {days} {days > 1 ? 'days' : 'day'}: {room.price * days}
+            Price: {room.price * days}
           </span>
           <Link
             onClick={() => {

@@ -23,7 +23,7 @@ export const Hotels = ({ match, location }) => {
   let data = location.state ? location.state : { city: match.params.data }
   data = !data.startDate && data.city === 'Anywhere' ? '' : data
 
-  const calulateDays = () => {
+  const calculateDays = () => {
     return data.startDate
       ? (new Date(data.endDate).getTime() -
           new Date(data.startDate).getTime()) /
@@ -45,14 +45,13 @@ export const Hotels = ({ match, location }) => {
         <>
           <h1>{data.city ? data.city : ' Anywhere'}</h1>
           {hotels.hotels.map((hotel) => {
-            const days = calulateDays()
+            const days = calculateDays()
             return <HotelCard hotel={hotel} days={days} />
           })}
         </>
       ) : (
         <h1>No hotels found in {data.city}</h1>
       )}
-      {console.log(hotels)}
     </div>
   )
 }
