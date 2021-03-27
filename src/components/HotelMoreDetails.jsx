@@ -28,9 +28,6 @@ export function HotelMoreDetails({ hotelId, city }) {
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  // hotelId = '604ba08e6cea81001597f032'
-  // city = 'Bydgoszcz'
-
   const getHotel = async () => {
     setLoading(true)
     try {
