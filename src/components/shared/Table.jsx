@@ -46,7 +46,6 @@ export function Table({
         pageSize={pageSize}
         loading={loading.state}
       />
-      {console.log(loading)}
     </div>
   )
 }
