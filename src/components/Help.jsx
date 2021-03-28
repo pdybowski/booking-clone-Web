@@ -17,14 +17,16 @@ export const Help = () => {
             <ListItemIcon>
               <MailOutlineIcon />
             </ListItemIcon>
-            Email enquiries:{' '}
-            <a href="mailto:booking@gmail.com">booking@gmail.com</a>
+            Email enquiries:
+            <a href="mailto:bookingcloneapi@gmail.com" className="helpLink">
+              &nbsp;bookingcloneapi@gmail.com
+            </a>
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <PhoneAndroidIcon />
             </ListItemIcon>
-            Phone number: 789-789-789
+            Phone number:<span className="helpNumber">&nbsp;789-789-789</span>
           </ListItem>
         </List>
       </Grid>

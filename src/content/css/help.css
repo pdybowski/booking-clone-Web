@@ -1,19 +1,19 @@
 .helpContainer {
-  position: relative;
-  width: 30%;
   transform: translate(0, 50%);
-  background-color: #fafafa;
-  /* background-color: #4c616d; */
-  /* background-color: #31a3be; */
-  border-radius: 3px;
-  border: 1px solid;
   margin: 0 auto;
-  box-shadow: 10px 13px 16px 3px rgba(0, 0, 0, 0.63);
 }
 
 .helpHeader {
   color: #ebb15f;
-  font-size: 48px;
+  font-size: 4rem;
   font-weight: bold;
   border-bottom: 1px solid;
+  margin-bottom: 30px;
+}
+.helpNumber {
+  font-weight: 700;
+}
+.helpLink {
+  color: #31a3be;
+  font-weight: 700;
 }
