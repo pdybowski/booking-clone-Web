@@ -17,7 +17,7 @@ export const Help = () => {
             <ListItemIcon>
               <MailOutlineIcon />
             </ListItemIcon>
-            Email enquiries:
+            Email :
             <a href="mailto:bookingcloneapi@gmail.com" className="helpLink">
               &nbsp;bookingcloneapi@gmail.com
             </a>
