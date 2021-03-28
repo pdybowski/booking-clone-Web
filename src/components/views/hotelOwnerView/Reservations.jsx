@@ -48,22 +48,23 @@ const Reservations = () => {
     })
   }
 
-  useEffect(() => {
-    const getData = async () => {
-      setPending({ state: true, type: 'tablePending' })
-      try {
-        const reservations = await fetchData(
-          global.API_BASE_URL + 'api/reservations',
-          'GET'
-        )
+  const getData = async () => {
+    setPending({ state: true, type: 'tablePending' })
+    try {
+      const reservations = await fetchData(
+        global.API_BASE_URL + 'api/reservations',
+        'GET'
+      )
 
-        setReservations(getNeededReservationData(reservations))
-        setPending({ state: false, type: 'tablePending' })
-      } catch (ex) {
-        setOpenError(true)
-        setErrorMsg(ex.message)
-      }
+      setReservations(getNeededReservationData(reservations))
+      setPending({ state: false, type: 'tablePending' })
+    } catch (ex) {
+      setOpenError(true)
+      setErrorMsg(ex.message)
     }
+  }
+
+  useEffect(() => {
     getData()
   }, [])
 
