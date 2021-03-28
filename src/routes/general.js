@@ -1,9 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import App from '../App'
-import { HotelMoreDetails, Register } from '../components'
-import { Hotels } from '../components/views/mainPageView/Hotels'
-import { NoMatch } from '../components/NoMatch'
+import { HotelMoreDetails, Register, Hotels, NoMatch } from '../components'
 
 const generalRoutes = [
   <Route exact path="/" component={() => <App />} key="app-route" />,
