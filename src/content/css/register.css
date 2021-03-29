@@ -31,9 +31,6 @@
 .text-align-left {
   text-align: left;
 }
-.grid-form-box {
-  /* min-height: 250px; */
-}
 
 .MuiGrid-root .MuiFormControlLabel-root {
   height: 50px;
