@@ -68,6 +68,7 @@ export function RoomCard({ room, numberOfDays = 1, hotelData, data }) {
         ...openSnackbar,
         status: true,
         content: 'Please login first!',
+        type: 'error',
       })
       return false
     }
