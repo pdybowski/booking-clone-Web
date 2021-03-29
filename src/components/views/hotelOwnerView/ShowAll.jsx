@@ -97,7 +97,8 @@ const ShowAll = () => {
       setPending({ state: false, type: 'tablePending' })
       setIsLoading(false)
     } catch (ex) {
-      alert(ex.message)
+      setAlert({ isAlert: true, msg: ex })
+      setIsLoading(false)
       setPending({ state: false, type: 'tablePending' })
     }
   }

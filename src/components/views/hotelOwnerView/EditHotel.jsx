@@ -76,6 +76,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
         body
       )
       history.go(0)
+      setIsLoading(false)
     } catch (ex) {
       setIsLoading(false)
       setAlert({ isAlert: true, msg: ex })
