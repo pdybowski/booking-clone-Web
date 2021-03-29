@@ -1,6 +1,7 @@
 .register-form {
   padding: 30px;
   min-height: 400px;
+  width: 50%;
   margin: 20px;
   background: #fafafa;
   border-radius: 15px;
@@ -31,7 +32,12 @@
   text-align: left;
 }
 .grid-form-box {
-  min-height: 250px;
+  /* min-height: 250px; */
+}
+
+.MuiGrid-root .MuiFormControlLabel-root {
+  height: 50px;
+  margin-top: 16px;
 }
 
 .width95 {
@@ -40,9 +46,12 @@
 .width95 .MuiFormControl-root {
   margin: 5px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 860px) {
   .align-center-mobile {
     align-items: center !important;
     text-align: center;
+  }
+  .gridContainer {
+    flex-direction: column;
   }
 }

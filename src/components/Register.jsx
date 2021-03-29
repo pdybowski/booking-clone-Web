@@ -123,16 +123,15 @@ export class Register extends React.Component {
             direction="row"
             justify="flex-start"
             alignItems="center"
-            spacing={3}
+            className="gridContainer"
           >
-            <Grid item xs={12} sm={6} className="grid-form-box">
+            <Grid item xs={12} sm={6} className="grid-form-box width95">
               <Grid
                 container
                 direction="column"
                 justify="center"
                 alignItems="flex-end"
-                spacing={3}
-                className="align-center-mobile"
+                className="align-center-mobile width95"
               >
                 <Grid item xs={12} className="width95">
                   <TextField
@@ -173,6 +172,32 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
+                <Grid item xs={12} className="width95">
+                  {this.state.form.isSmsAllowed ? (
+                    <TextField
+                      className="width95"
+                      id="outlined-basic"
+                      type="tel"
+                      label="Phone Number"
+                      variant="outlined"
+                      onChange={(e) => this.handlePhoneNumberChange(e)}
+                      noValidate
+                      required
+                      color="secondary"
+                    />
+                  ) : (
+                    <TextField
+                      className="width95"
+                      id="outlined-basic"
+                      type="tel"
+                      label="Phone Number"
+                      variant="outlined"
+                      onChange={(e) => this.handlePhoneNumberChange(e)}
+                      noValidate
+                      color="secondary"
+                    />
+                  )}
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6} className="grid-form-box width95">
@@ -181,7 +206,6 @@ export class Register extends React.Component {
                 direction="column"
                 justify="center"
                 alignItems="flex-start"
-                spacing={3}
                 className="align-center-mobile width95"
               >
                 <Grid item xs={12} className="width95">
@@ -208,11 +232,7 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  className="select-input text-align-left width95"
-                >
+                <Grid item xs={12} className="width95">
                   <FormControl className="width95">
                     <InputLabel id="demo-simple-select-label" color="secondary">
                       Role
@@ -229,56 +249,11 @@ export class Register extends React.Component {
                     </Select>
                   </FormControl>
                 </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} className="width95">
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                spacing={3}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  className="text-align-right align-center-mobile width95"
-                >
-                  {this.state.form.isSmsAllowed ? (
-                    <TextField
-                      className="width95"
-                      id="outlined-basic"
-                      type="tel"
-                      label="Phone Number"
-                      variant="outlined"
-                      onChange={(e) => this.handlePhoneNumberChange(e)}
-                      noValidate
-                      required
-                      color="secondary"
-                    />
-                  ) : (
-                    <TextField
-                      className="width95"
-                      id="outlined-basic"
-                      type="tel"
-                      label="Phone Number"
-                      variant="outlined"
-                      onChange={(e) => this.handlePhoneNumberChange(e)}
-                      noValidate
-                      color="secondary"
-                    />
-                  )}
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  className="text-align-left align-center-mobile"
-                >
+                <Grid item xs={12} className="width95">
                   <FormControlLabel
                     control={
                       <Checkbox
+                        className="chackboxAllowSms"
                         checked={this.state.form.isSmsAllowed}
                         onChange={(e) =>
                           this.handlePhoneNumberCheckboxChange(e)
