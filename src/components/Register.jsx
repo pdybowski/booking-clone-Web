@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  TextField, 
+  TextField,
   CircularProgress,
   MenuItem,
   FormControl,
@@ -134,9 +134,9 @@ export class Register extends React.Component {
                 spacing={3}
                 className="align-center-mobile"
               >
-                <Grid item xs={12} className="width100">
+                <Grid item xs={12} className="width95">
                   <TextField
-                    className="width100"
+                    className="width95"
                     id="outlined-basic"
                     label="Email"
                     type="email"
@@ -147,9 +147,9 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
-                <Grid item xs={12} className="width100">
+                <Grid item xs={12} className="width95">
                   <TextField
-                    className="width100"
+                    className="width95"
                     id="outlined-basic"
                     label="Password"
                     type="password"
@@ -160,9 +160,9 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
-                <Grid item xs={12} className="width100">
+                <Grid item xs={12} className="width95">
                   <TextField
-                    className="width100"
+                    className="width95"
                     id="outlined-basic"
                     label="Repeat Password"
                     type="password"
@@ -175,18 +175,18 @@ export class Register extends React.Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} className="grid-form-box width100">
+            <Grid item xs={12} sm={6} className="grid-form-box width95">
               <Grid
                 container
                 direction="column"
                 justify="center"
                 alignItems="flex-start"
                 spacing={3}
-                className="align-center-mobile width100"
+                className="align-center-mobile width95"
               >
-                <Grid item xs={12} className="width100">
+                <Grid item xs={12} className="width95">
                   <TextField
-                    className="width100"
+                    className="width95"
                     id="outlined-basic"
                     label="First Name"
                     variant="outlined"
@@ -196,9 +196,9 @@ export class Register extends React.Component {
                     color="secondary"
                   />
                 </Grid>
-                <Grid item xs={12} className="width100">
+                <Grid item xs={12} className="width95">
                   <TextField
-                    className="width100"
+                    className="width95"
                     id="outlined-basic"
                     label="Last Name"
                     variant="outlined"
@@ -211,9 +211,9 @@ export class Register extends React.Component {
                 <Grid
                   item
                   xs={12}
-                  className="select-input text-align-left width100"
+                  className="select-input text-align-left width95"
                 >
-                  <FormControl className="width100">
+                  <FormControl className="width95">
                     <InputLabel id="demo-simple-select-label" color="secondary">
                       Role
                     </InputLabel>
@@ -231,7 +231,7 @@ export class Register extends React.Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} className="width100">
+            <Grid item xs={12} className="width95">
               <Grid
                 container
                 direction="row"
@@ -243,11 +243,11 @@ export class Register extends React.Component {
                   item
                   xs={12}
                   sm={6}
-                  className="text-align-right align-center-mobile width100"
+                  className="text-align-right align-center-mobile width95"
                 >
                   {this.state.form.isSmsAllowed ? (
                     <TextField
-                      className="width100"
+                      className="width95"
                       id="outlined-basic"
                       type="tel"
                       label="Phone Number"
@@ -259,7 +259,7 @@ export class Register extends React.Component {
                     />
                   ) : (
                     <TextField
-                      className="width100"
+                      className="width95"
                       id="outlined-basic"
                       type="tel"
                       label="Phone Number"
