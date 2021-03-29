@@ -62,8 +62,8 @@ export const Users = ({ columns, useStyles }) => {
       return
     }
 
-    setOpenError({ ...openError, state: false })
-    setOpenSuccess({ ...openSuccess, state: false })
+    setOpenError({ ...openError, status: false })
+    setOpenSuccess({ ...openSuccess, status: false })
   }
 
   const getUsers = async () => {
