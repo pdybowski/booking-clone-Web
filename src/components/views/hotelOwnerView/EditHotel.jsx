@@ -78,7 +78,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
       history.go(0)
     } catch (ex) {
       setIsLoading(false)
-      console.log(ex)
+      setAlert({ isAlert: true, msg: ex })
     }
   }
 
@@ -91,7 +91,8 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
       setHotel(hotel)
       setIsLoading(false)
     } catch (ex) {
-      console.log(ex.message)
+      setIsLoading(false)
+      setAlert({ isAlert: true, msg: ex })
     }
   }
 
