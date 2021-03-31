@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { fetchData } from '../../../utils'
+import { fetchData, handleRoomAdd } from '../../../utils'
 import TextField from '@material-ui/core/TextField'
 import LoadingIcon from '../../shared/LoadingIcon'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router'
+import Popup from '../../shared/Popup'
+import AddRoom from './AddRoom'
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -15,40 +17,64 @@ const useStyles = makeStyles((theme) => ({
 
 const EditHotel = ({ id, setIsTable, setAlert }) => {
   const [hotel, setHotel] = useState({})
+  const [room, setRoom] = useState({ beds: { single: 0, double: 0 } })
   const [isLoading, setIsLoading] = useState(true)
+  const [isPopupLoading, setIsPopupLoading] = useState(false)
+  const [popupOpen, setPopupOpen] = useState(false)
   const classes = useStyles()
   const history = useHistory()
 
   const validate = () => {
     if (!hotel.name) {
-      setAlert({ isAlert: true, msg: 'Hotel name is incorrect' })
+      validateError('Hotel name is incorrect')
       return false
     } else if (!hotel.email) {
-      setAlert({ isAlert: true, msg: 'Email is incorrect' })
+      validateError('Email is incorrect')
       return false
     } else if (
       !hotel.phoneNumber ||
       hotel.phoneNumber.toString().length !== 9
     ) {
-      setAlert({ isAlert: true, msg: 'Phone number is incorrect' })
+      validateError('Phone number is incorrect')
       return false
     } else if (!hotel.localization.country) {
-      setAlert({ isAlert: true, msg: 'Country is incorrect' })
+      validateError('Country is incorrect')
       return false
     } else if (!hotel.localization.city) {
-      setAlert({ isAlert: true, msg: 'City is incorrect' })
+      validateError('City is incorrect')
       return false
     } else if (!hotel.localization.street) {
-      setAlert({ isAlert: true, msg: 'Street is incorrect' })
+      validateError('Street is incorrect')
       return false
     } else if (!hotel.localization.buildingNumber) {
-      setAlert({ isAlert: true, msg: 'Building Number is incorrect' })
+      validateError('Building Number is incorrect')
       return false
     } else if (!hotel.localization.zipcode) {
-      setAlert({ isAlert: true, msg: 'Zip Code is incorrect' })
+      validateError('Zip Code is incorrect')
       return false
     } else {
       return true
+    }
+  }
+
+  const validateError = (msg) => {
+    setAlert({ isAlert: true, msg })
+  }
+
+  const submitAddRoom = async () => {
+    try {
+      setIsPopupLoading(true)
+      await fetchData(
+        global.API_BASE_URL + `api/hotelOwner/hotels/${id}/addRoom`,
+        'POST',
+        [room]
+      )
+
+      setIsPopupLoading(false)
+      setPopupOpen(false)
+    } catch (ex) {
+      setAlert({ isAlert: true, msg: ex })
+      setIsPopupLoading(false)
     }
   }
 
@@ -228,9 +254,24 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
               })
             }
           />
-          <Button variant="contained" className={classes.input}>
-            Add Room
-          </Button>
+          <Popup
+            buttonTitle={'Add Room'}
+            modalContent={
+              isPopupLoading ? (
+                <LoadingIcon />
+              ) : (
+                <AddRoom
+                  room={room}
+                  setRoom={setRoom}
+                  handleRoomAdd={() => {
+                    handleRoomAdd(room, validateError, submitAddRoom)
+                  }}
+                />
+              )
+            }
+            open={popupOpen}
+            setOpen={setPopupOpen}
+          />
           <div
             style={{
               display: 'flex',
