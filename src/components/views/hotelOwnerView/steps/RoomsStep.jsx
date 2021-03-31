@@ -18,8 +18,6 @@ export const RoomsStep = ({ setRooms }) => {
   const [room, setRoom] = useState({ beds: { single: 0, double: 0 } })
   const [roomsList, setRoomsList] = useState([])
 
-  console.log(roomsList)
-
   useEffect(() => {
     setRooms(roomsList)
   }, [roomsList])
