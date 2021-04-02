@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 
 export const Cities = ({ useStyles }) => {
-  const [city, setCity] = useState([])
+  const [city, setCity] = useState()
   const [adding, setAdding] = useState(false)
   const [added, setAdded] = useState(false)
   const classes = useStyles()
@@ -15,7 +15,7 @@ export const Cities = ({ useStyles }) => {
   const handlerCityChange = (e) => {
     setCity(e.target.value)
   }
-  const addNext = () => {
+  const goNext = () => {
     setCity([])
     setAdding(false)
     setAdded(false)
@@ -31,9 +31,8 @@ export const Cities = ({ useStyles }) => {
           name: city,
         }
       )
-      if (addedCity) {
-        setAdded(true)
-      }
+
+      setAdded(true)
     } catch (err) {
       alert(err.message)
       setAdding(false)
@@ -55,7 +54,7 @@ export const Cities = ({ useStyles }) => {
             <CheckCircleIcon fontSize="large" style={{ color: 'green' }} />
           </div>
           <Button
-            onClick={addNext}
+            onClick={goNext}
             size="small"
             variant="contained"
             color="secondary"
