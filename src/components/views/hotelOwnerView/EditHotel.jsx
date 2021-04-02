@@ -17,7 +17,10 @@ const useStyles = makeStyles((theme) => ({
 
 const EditHotel = ({ id, setIsTable, setAlert }) => {
   const [hotel, setHotel] = useState({})
-  const [room, setRoom] = useState({ beds: { single: 0, double: 0 } })
+  const [room, setRoom] = useState({
+    beds: { single: 0, double: 0 },
+    description: '',
+  })
   const [isLoading, setIsLoading] = useState(true)
   const [isPopupLoading, setIsPopupLoading] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
@@ -58,7 +61,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
   }
 
   const validateError = (msg) => {
-    setAlert({ isAlert: true, msg })
+    setAlert({ isAlert: true, msg, severity: 'error' })
   }
 
   const submitAddRoom = async () => {
@@ -72,8 +75,13 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
 
       setIsPopupLoading(false)
       setPopupOpen(false)
+      setAlert({
+        isAlert: true,
+        msg: 'Room has been added',
+        severity: 'success',
+      })
     } catch (ex) {
-      setAlert({ isAlert: true, msg: ex })
+      setAlert({ isAlert: true, msg: ex, severity: 'error' })
       setIsPopupLoading(false)
     }
   }
@@ -81,7 +89,6 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
   const submitHotel = async () => {
     if (!validate()) return
     try {
-      setIsLoading(true)
       const { name, email, phoneNumber, localization } = hotel
       const { city, country, street, zipcode, buildingNumber } = localization
       const body = {
@@ -101,11 +108,14 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
         'PUT',
         body
       )
+      setAlert({
+        isAlert: 'true',
+        msg: 'Hotel has been saved.',
+        severity: 'success',
+      })
       history.go(0)
-      setIsLoading(false)
     } catch (ex) {
-      setIsLoading(false)
-      setAlert({ isAlert: true, msg: ex })
+      setAlert({ isAlert: true, msg: ex, severity: 'error' })
     }
   }
 
@@ -119,7 +129,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
       setIsLoading(false)
     } catch (ex) {
       setIsLoading(false)
-      setAlert({ isAlert: true, msg: ex })
+      setAlert({ isAlert: true, msg: ex, severity: 'error' })
     }
   }
 
@@ -283,7 +293,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
             <Button
               variant="contained"
               style={{ width: '5rem' }}
-              onClick={() => setIsTable(true)}
+              onClick={() => history.go(0)}
             >
               Cancel
             </Button>

@@ -62,7 +62,6 @@ const AddRoom = ({ handleRoomAdd, setRoom, room }) => {
           label="Description"
           multiline
           onChange={(e) => setRoom({ ...room, description: e.target.value })}
-          required
         />
         <Button variant="contained" color="secondary" onClick={handleRoomAdd}>
           Add Room
