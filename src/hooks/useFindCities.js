@@ -1,17 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchData } from '../utils'
 
 export const useFindCities = () => {
   const [cities, setCities] = useState([])
-  const findCities = async (setPending) => {
+  const [isPending, setIsPending] = useState(true)
+  const findCities = async () => {
     try {
       const cities = await fetchData(global.API_BASE_URL + 'api/cities', 'GET')
       setCities(cities)
-      setPending(false)
+      setIsPending(false)
     } catch (err) {
       alert(err)
     }
   }
+  useEffect(() => {
+    findCities()
+  }, [])
 
-  return [cities, findCities]
+  return [cities, isPending]
 }

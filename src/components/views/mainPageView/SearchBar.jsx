@@ -32,8 +32,7 @@ const SearchBar = () => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [redirect, setRedirect] = useState(false)
-  const [pending, setPending] = useState(true)
-  const [cities, setCities] = useFindCities()
+  const [cities, isPending] = useFindCities()
 
   const MenuProps = {
     PaperProps: {
@@ -60,10 +59,6 @@ const SearchBar = () => {
     setRedirect(true)
   }
 
-  useEffect(() => {
-    setCities(setPending)
-  }, [])
-
   return (
     <div className="search-bar-container">
       <form onSubmit={submit}>
@@ -72,7 +67,7 @@ const SearchBar = () => {
             className={`${classes.field} search-bar-field`}
             color="secondary"
           >
-            {pending ? (
+            {isPending ? (
               <LoadingIcon />
             ) : (
               <>

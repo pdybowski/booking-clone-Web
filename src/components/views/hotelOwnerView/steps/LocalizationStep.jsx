@@ -27,8 +27,7 @@ export const LocalizationStep = ({
   city,
 }) => {
   const classes = useStyles()
-  const [pending, setPending] = useState(true)
-  const [cities, setCities] = useFindCities()
+  const [cities, isPending] = useFindCities()
 
   const MenuProps = {
     PaperProps: {
@@ -41,10 +40,6 @@ export const LocalizationStep = ({
     },
   }
 
-  useEffect(() => {
-    setCities(setPending)
-  }, [])
-
   return (
     <form className={classes.form} noValidate autoComplete="off">
       <TextField
@@ -52,7 +47,7 @@ export const LocalizationStep = ({
         label="Country"
         onChange={(e) => setCountry(e.target.value)}
       />
-      {pending ? (
+      {isPending ? (
         <LoadingIcon />
       ) : (
         <>

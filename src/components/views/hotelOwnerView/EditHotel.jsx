@@ -30,8 +30,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
   const classes = useStyles()
   const history = useHistory()
 
-  const [pending, setPending] = useState(true)
-  const [cities, setCities] = useFindCities()
+  const [cities, isPending] = useFindCities()
 
   const validate = () => {
     if (!hotel.name) {
@@ -141,7 +140,6 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
 
   useEffect(() => {
     getHotel()
-    setCities(setPending)
   }, [])
 
   const MenuProps = {
@@ -221,7 +219,7 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
               })
             }
           />
-          {pending ? (
+          {isPending ? (
             <LoadingIcon />
           ) : (
             <>
