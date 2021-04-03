@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
@@ -9,6 +9,10 @@ import Select from '@material-ui/core/Select'
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
+import { fetchData } from '../../../utils'
+import { useFindCities } from '../../../hooks'
+import LoadingIcon from '../../shared/LoadingIcon'
+import { SELECT_MENU_PROPS } from '../../../constants'
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -28,6 +32,19 @@ const SearchBar = () => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [redirect, setRedirect] = useState(false)
+  const [pending, setPending] = useState(true)
+  const [cities, setCities] = useFindCities()
+
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight:
+          SELECT_MENU_PROPS.ITEM_HEIGHT * 4.5 +
+          SELECT_MENU_PROPS.ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  }
 
   const data = {
     city: city === 'Anywhere' ? '' : city,
@@ -43,6 +60,10 @@ const SearchBar = () => {
     setRedirect(true)
   }
 
+  useEffect(() => {
+    setCities(setPending)
+  }, [])
+
   return (
     <div className="search-bar-container">
       <form onSubmit={submit}>
@@ -51,20 +72,31 @@ const SearchBar = () => {
             className={`${classes.field} search-bar-field`}
             color="secondary"
           >
-            <InputLabel id="demo-simple-select-label">City</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              onChange={(e) => setCity(e.target.value)}
-              value={city}
-              color="secondary"
-              required
-            >
-              <MenuItem value={'Anywhere'}>Anywhere</MenuItem>
-              <MenuItem value={'Warsaw'}>Warsaw</MenuItem>
-              <MenuItem value={'Wroclaw'}>Wroclaw</MenuItem>
-              <MenuItem value={'Bydgoszcz'}>Bydgoszcz</MenuItem>
-            </Select>
+            {pending ? (
+              <LoadingIcon />
+            ) : (
+              <>
+                <InputLabel id="demo-simple-select-label">City</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  onChange={(e) => setCity(e.target.value)}
+                  value={city}
+                  color="secondary"
+                  required
+                  MenuProps={MenuProps}
+                >
+                  <MenuItem value={'Anywhere'}>Anywhere</MenuItem>
+                  {cities.map(({ name }, index) => {
+                    return (
+                      <MenuItem value={name} key={index + name}>
+                        {name}
+                      </MenuItem>
+                    )
+                  })}
+                </Select>
+              </>
+            )}
           </FormControl>
           <TextField
             id="date"
