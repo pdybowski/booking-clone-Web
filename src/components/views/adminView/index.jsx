@@ -9,6 +9,7 @@ import { Users } from './Users'
 import {
   ADMIN_PATHNAMES,
   usersColumns,
+  cityColumns,
   adminStyles as useStyles,
 } from '../../../constants'
 import { WelcomePage } from './WelcomePage'
@@ -28,7 +29,8 @@ export class AdminView extends React.Component {
     if (path === ADMIN_PATHNAMES.HOTELOWNERS)
       return <HotelOwners columns={hotelOwnerColumns} useStyles={useStyles} />
     if (path === ADMIN_PATHNAMES.CITIES) return <Cities useStyles={useStyles} />
-    if (path === ADMIN_PATHNAMES.GETCITIES) return <GetCities />
+    if (path === ADMIN_PATHNAMES.GETCITIES)
+      return <GetCities columns={cityColumns} useStyles={useStyles} />
     if (path === ADMIN_PATHNAMES.RESERVATIONS) return <Reservations />
     if (!path) return <WelcomePage useStyles={useStyles} />
   }
