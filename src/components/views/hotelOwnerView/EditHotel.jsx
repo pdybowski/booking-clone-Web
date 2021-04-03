@@ -245,7 +245,6 @@ const EditHotel = ({ id, setIsTable, setAlert }) => {
                   required
                   MenuProps={MenuProps}
                 >
-                  {console.log(hotel.localization.city)}
                   {cities.map(({ name }, index) => {
                     return (
                       <MenuItem value={name} key={index + name}>
