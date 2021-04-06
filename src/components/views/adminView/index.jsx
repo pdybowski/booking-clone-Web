@@ -17,12 +17,6 @@ import { hotelOwnerColumns } from './hotelOwnerColumns'
 import { Redirect } from 'react-router'
 
 export class AdminView extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.pathname = this.props.location ? this.props.location.pathname : null
-  }
-
   handleRenderTable(path) {
     if (path === ADMIN_PATHNAMES.USERS)
       return <Users columns={usersColumns} useStyles={useStyles} />
@@ -40,7 +34,9 @@ export class AdminView extends React.Component {
         {isAdmin() ? (
           <>
             <AdminMenu />
-            {this.handleRenderTable(this.pathname)}
+            {this.handleRenderTable(
+              this.props.location ? this.props.location.pathname : null
+            )}
           </>
         ) : (
           <Redirect to="/" />

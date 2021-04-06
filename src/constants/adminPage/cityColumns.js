@@ -1,3 +1,3 @@
 export const cityColumns = [
-  { field: 'cityName', headerName: 'City name', width: 150 },
+  { field: 'cityName', headerName: 'City name', width: 400 },
 ]

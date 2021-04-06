@@ -17,6 +17,7 @@ const routes = [
   {
     type: 'dropdown',
     name: 'City',
+    location: '/',
     dropdownItems: [
       {
         location: '/admin/cities',
