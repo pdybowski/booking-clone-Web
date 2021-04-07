@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { fetchData } from '../../../utils/'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Stepper,
@@ -7,10 +8,8 @@ import {
   Button,
   Typography,
   CircularProgress,
-} from 'material-ui/core'
-
+} from '@material-ui/core'
 import { RoomsStep, LocalizationStep, BasicInformationStep } from './steps'
-import { fetchData } from '../../../utils/'
 import useNotification from '../../../hooks/useNotification'
 
 const useStyles = makeStyles((theme) => ({
