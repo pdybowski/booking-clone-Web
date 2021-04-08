@@ -12,6 +12,8 @@ npm install #to install all the dependencies
 npm start #to build and run the app on localhost
 ```
 
+Also you need to have [Booking Clone Api](https://github.com/pdybowski/booking-clone-Api) installed on your operating system.
+
 ## Home Page
 
 <img src='./src/static/readme/homePage.png' />
@@ -35,8 +37,6 @@ npm start #to build and run the app on localhost
 ## Admin Panel
 
 <img src='./src/static/readme/adminPanel.png'>
-
-Also you need to have [Booking Clone Api](https://github.com/pdybowski/booking-clone-Api) installed on your operating system.
 
 ## Build With
 
