@@ -13,6 +13,7 @@ npm start #to build and run the app on localhost
 ```
 
 Also you need to have [Booking Clone Api](https://github.com/pdybowski/booking-clone-Api) installed on your operating system.
+To set up api properly reffer to [this](https://github.com/pdybowski/booking-clone-Api#readme) documentation
 
 ## Home Page
 
