@@ -8,6 +8,7 @@ import { COOKIE_TOKEN, HOTEL_OWNER_ROLE } from '../constants'
 import { removeCookie } from '../utils'
 import { Login } from './Login'
 import { useUserStatus } from '../hooks'
+import useNotification from '../hooks/useNotification'
 
 export const TopSection = () => {
   const [isLogged, userInfo] = useUserStatus()
@@ -17,6 +18,7 @@ export const TopSection = () => {
     removeCookie(COOKIE_TOKEN)
     window.location.href = '/'
   }
+  const { openNotification } = useNotification()
 
   return (
     <div id="TopSection" className="topSectionContainer">
@@ -72,7 +74,7 @@ export const TopSection = () => {
           className="loginContainer"
         >
           <Grid item>
-            <Login />
+            <Login openNotification={openNotification} />
             <div className="loginButtonContainer">
               <a href="#" className="loginForgotPassword loginLink">
                 FORGOT PASSWORD
