@@ -54,7 +54,7 @@ export function HotelCard({ hotel, days, data }) {
               {hotel.name}
             </span>
             <Rating
-              className={classes.rating}
+              className={`${classes.rating} hotel-card__raiting`}
               name="read-only"
               value={1}
               readOnly
