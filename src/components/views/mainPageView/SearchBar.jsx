@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box'
 import { useFindCities } from '../../../hooks'
 import LoadingIcon from '../../shared/LoadingIcon'
 import { SELECT_MENU_PROPS } from '../../../constants'
+import useNotification from '../../../hooks/useNotification'
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles()
-
+  const { openNotification } = useNotification()
+  const [error, setError] = useState(false)
   const [city, setCity] = useState('Anywhere')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
@@ -52,9 +54,22 @@ const SearchBar = () => {
     children,
     isAvailable: true,
   }
+  useEffect(() => {
+    if (startDate && endDate && startDate > endDate) {
+      openNotification('Incorrect time peroid', 'error')
+      setError(true)
+    } else {
+      setError(false)
+    }
+  }, [startDate, endDate])
 
   const submit = (e) => {
     e.preventDefault()
+    if (startDate > endDate) {
+      openNotification('Incorrect time peroid', 'error')
+      setError(true)
+      return
+    }
     setRedirect(true)
   }
 
@@ -93,6 +108,7 @@ const SearchBar = () => {
             )}
           </FormControl>
           <TextField
+            error={error}
             id="date"
             color="secondary"
             label="Start Date"
@@ -106,6 +122,7 @@ const SearchBar = () => {
             required
           />
           <TextField
+            error={error}
             id="date"
             color="secondary"
             label="End Date"
@@ -124,6 +141,7 @@ const SearchBar = () => {
             className={`${classes.numberField} search-bar-number-field`}
             label="Adults"
             type="number"
+            InputProps={{ inputProps: { min: 1 } }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -138,6 +156,7 @@ const SearchBar = () => {
             label="Children"
             style={{ marginLeft: '.5rem' }}
             type="number"
+            InputProps={{ inputProps: { min: 0 } }}
             InputLabelProps={{
               shrink: true,
             }}
