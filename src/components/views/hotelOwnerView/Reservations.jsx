@@ -59,7 +59,7 @@ const Reservations = () => {
   }, [])
 
   return (
-    <div className="user-table">
+    <div className="hotel-owner-table">
       <Table
         rows={reservations}
         columns={reservationsColums}

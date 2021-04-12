@@ -1,5 +1,10 @@
-.loginInput {
-  margin: 12px 10px 0;
+.loginSubmitContainer {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
 }
 
 .loginUserInfo {
@@ -9,4 +14,16 @@
 
 .loginTextField {
   margin-right: 3px !important;
+}
+
+@media screen and (max-width: 960px) {
+  #Login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+  }
+  .topSectionContainer .loginContainer {
+    justify-content: center;
+  }
 }
