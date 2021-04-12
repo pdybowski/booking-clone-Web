@@ -62,7 +62,7 @@ export const Hotels = ({ match, location }) => {
   }
 
   return (
-    <div className={classes.container}>
+    <div className={`${classes.container} hotels-container`}>
       {loading ? (
         <CircularProgress
           className={classes.center}
