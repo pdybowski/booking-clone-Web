@@ -16,7 +16,11 @@ const PrivateUserRoute = ({ ...rest }) => {
 
 const userRoutes = [
   <PrivateUserRoute path="/user" exact key="user-route" />,
-  <PrivateUserRoute path="/user/changePassword" exact key="user-route" />,
+  <PrivateUserRoute
+    path="/user/reservations"
+    exact
+    key="user-route-reservations"
+  />,
 ]
 
 export default userRoutes

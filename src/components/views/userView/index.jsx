@@ -2,15 +2,15 @@ import React from 'react'
 import { WelcomePage } from './WelcomePage'
 import { menuItems, classes } from './menuConfigUser'
 import Menu from '../../shared/Menu'
-import { ChangePassword } from './ChangePassword'
+import Reservations from './Reservations'
 
 const UserView = ({ location }) => {
   const handleRouteChange = (path) => {
     switch (path) {
       case '/user':
         return <WelcomePage />
-      case '/user/changePassword':
-        return <ChangePassword />
+      case '/user/reservations':
+        return <Reservations />
       default:
         return
     }
