@@ -76,7 +76,7 @@ export const TopSection = () => {
           <Grid item>
             <Login openNotification={openNotification} />
             <div className="loginButtonContainer">
-              <Link href="#" className="loginForgotPassword loginLink">
+              <Link to="/" className="loginForgotPassword loginLink">
                 FORGOT PASSWORD
               </Link>
               <Link to={`/register`} className="loginLink">
