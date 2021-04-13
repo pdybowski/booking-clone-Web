@@ -23,6 +23,7 @@ export default function Popup({
   open,
   setOpen,
   isButton = true,
+  isButtons = true,
 }) {
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
@@ -61,7 +62,7 @@ export default function Popup({
           <DialogContentText>{modalContent}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          {isButton ? (
+          {isButtons ? (
             <>
               <Button
                 onClick={buttonAgreeFunction && buttonAgreeFunction}

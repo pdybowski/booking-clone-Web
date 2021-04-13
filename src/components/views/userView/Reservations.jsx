@@ -91,6 +91,7 @@ const Reservations = () => {
       />
       <Popup
         isButton={false}
+        isButtons={false}
         open={popupOpen}
         setOpen={setPopupOpen}
         modalContent={
