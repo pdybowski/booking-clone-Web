@@ -8,6 +8,6 @@ switch (process.env.REACT_APP_ENV) {
     break
   case 'production':
   default:
-    SETTINGS.API_BASE_URL = 'https://booking-clone-api.herokuapp.com/'
+    SETTINGS.API_BASE_URL = 'https://bookingclone-coders-camp-1afa2d890913.herokuapp.com/'
     break
 }
