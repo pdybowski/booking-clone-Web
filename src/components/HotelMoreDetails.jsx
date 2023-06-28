@@ -23,13 +23,15 @@ TablePaginationActions.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: 'rgb(236 236 236)',
+    boxShadow: '0px 0px 8px -1px #afafaf9e',
+    backgroundColor: 'white',
     marginBottom: '15px',
     borderRadius: '5px',
     padding: '10px',
   },
   header: {
     fontSize: '22px',
+    margin: '12px 0px',
   },
   city: {
     fontSize: '18px',

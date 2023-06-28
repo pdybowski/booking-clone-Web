@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    backgroundColor: 'rgb(236 236 236)',
+    backgroundColor: 'white',
+    boxShadow: '0px 0px 8px -1px #afafaf9e',
     margin: '5px',
     borderRadius: '5px',
     boxSizing: 'border-box',
@@ -31,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '30px',
     fontWeight: 'bold',
   },
+  button: {
+    "&:hover": {
+      color: "white",
+    },
+  }
 }))
 
 export function HotelCard({ hotel, days, data }) {
